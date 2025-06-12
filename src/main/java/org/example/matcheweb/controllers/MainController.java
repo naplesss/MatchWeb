@@ -1,8 +1,12 @@
 package org.example.matcheweb.controllers;
 
+import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -34,7 +38,7 @@ public class MainController {
     // registrazione andata bene
     @GetMapping("/correct")
     public String correct() {
-        return "correct";
+        return "tuttapposto";
     }
 
     // logout
@@ -65,6 +69,27 @@ public class MainController {
     @GetMapping("/recensioni")
     public String recensioni() {return "recensioni";}
 
+    @PostMapping("/addUser")
+    public String addUser(@RequestParam String firstName,
+                          @RequestParam String lastName,
+                          @RequestParam String email,
+                          @RequestParam String username,
+                          @RequestParam String password,
+                          @RequestParam String birthdate,
+                          Model model) {
+        String returnPage;
+        //cambiare signup failure
+        if (userRepository.userExists(username)) {
+            System.out.println("User already exists");
+            model.addAttribute("username", username);
+            returnPage = "signupFailure";
+        } else {
+            userRepository.addUser(new User(firstName, lastName, email, username, password, "ROLE_USER", birthdate));
+            model.addAttribute("username", username);
+            returnPage = "tuttapposto";
+        }
+        return returnPage;
+    }
 
 
 

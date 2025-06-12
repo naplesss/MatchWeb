@@ -25,13 +25,20 @@
     <input type="text" id="username" name="username" value="" required><br><br>
     <!-- password-->
     <label for="password">Password</label><br>
+    <!--password contenente 2 numeri, un carattere speciale, lunga almeno 9 caratteri -->
     <input type="password" id="password" name="password"
-           pattern="^(?=(.*\d){2,}).{9,}$"
-           title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+           pattern="^(?=(.*\d){2,})(?=.*[!@#$%^&*(),.?\:{}|<>]).{9,}$"
+           title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required>
     <!--verify password-->
-    <label for="vPassword"></label><br>
+    <label for="vPassword">Verify Password</label><br>
     <input type="password" id="vPassword" name="vPassword">
     <br><br>
+    <label for="sport">Seleziona uno sport:</label>
+    <select id="sport" name="sport">
+        <option value="1">Tiro alla fune</option>
+        <option value="2">Lacrosse</option>
+        <option value="3">Polo</option>
+    </select>
     <input type="submit" value="Sign up">
 </form>
 

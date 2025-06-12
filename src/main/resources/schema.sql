@@ -19,3 +19,11 @@ CREATE TABLE IF NOT EXISTS AUTHORITIES (
     username varchar(64) NOT NULL,
     authority varchar(64) NOT NULL
     );
+
+INSERT into USERS (username, password, enabled)
+SELECT * FROM(
+    values('admin#21','password',1),
+          ('moderator#21','password',1),
+          ('user#21','passworddainserirre',1)
+    ) as utenti(username,password,enabled)
+WHERE NOT EXISTS(SELECT 1 FROM USERS LIMIT 1);

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS USERDATA (
     firstName varchar(64 ) NOT NULL,
     lastName varchar(64) NOT NULL,
     email varchar(256) NOT NULL,
-    birthdate varchar(64) NOT NULL,
+    birthdate varchar(64) NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS USERS (

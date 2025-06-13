@@ -31,15 +31,23 @@
            title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required>
     <!--verify password-->
     <label for="vPassword">Verify Password</label><br>
-    <input type="password" id="vPassword" name="vPassword">
+    <input type="password" id="vPassword" name="vPassword" required>
     <br><br>
     <label for="sport">Seleziona uno sport:</label>
-    <select id="sport" name="sport">
+    <select id="sport" name="sport" required>
         <option value="1">Tiro alla fune</option>
         <option value="2">Lacrosse</option>
         <option value="3">Polo</option>
     </select>
+    <br><br>
+    <label for="sport">Seleziona uno sport:</label>
+    <select id="sportcuore" name="sportcuore" required>
+        <option value="">scegli una squadra</option>
+
+    </select>
+
     <input type="submit" value="Sign up">
+    <input type="reset" value="reset">
 </form>
 
 </body>

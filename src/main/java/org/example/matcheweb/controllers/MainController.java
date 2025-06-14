@@ -76,6 +76,8 @@ public class MainController {
                           @RequestParam String username,
                           @RequestParam String password,
                           @RequestParam String birthdate,
+                          @RequestParam String sport,
+                          @RequestParam String squadra,
                           Model model) {
         String returnPage;
         //cambiare signup failure
@@ -84,7 +86,7 @@ public class MainController {
             model.addAttribute("username", username);
             returnPage = "signupFailure";
         } else {
-            userRepository.addUser(new User(firstName, lastName, email, username, password, "ROLE_USER", birthdate));
+            userRepository.addUser(new User(firstName, lastName, email, username, password, "ROLE_USER", birthdate, sport, squadra));
             model.addAttribute("username", username);
             returnPage = "tuttapposto";
         }

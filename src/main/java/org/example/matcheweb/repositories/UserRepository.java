@@ -44,13 +44,15 @@ import java.util.List;
             }
 
             public void addUser (User user){
-                String sql = "INSERT INTO USERDATA VALUES (DEFAULT, ?, ?, ?, ?,?)";
+                String sql = "INSERT INTO USERDATA VALUES (DEFAULT, ?, ?, ?, ?,?, ?, ?)";
                 jdbc.update(sql,
                         user.getUsername(),
                         user.getFirstName(),
                         user.getLastName(),
                         user.getEmail(),
-                        user.getBirthdate()
+                        user.getBirthdate(),
+                        user.getsport(),
+                        user.getsquadra()
                 );
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userDetailsManager.createUser(new SecurityUser(user));

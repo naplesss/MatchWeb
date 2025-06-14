@@ -9,6 +9,8 @@ public class User {
     private String password;
     private String role;
     private String birthdate;
+    private String sport;
+    private String squadra;
 
     public User() {
         this.id = 0;
@@ -19,9 +21,11 @@ public class User {
         this.password = "";
         this.role = "";
         this.birthdate = "";
+        this.sport = "";
+        this.squadra = "";
     }
 
-    public User(String firstName, String lastName, String email, String username, String password, String role, String birthdate) {
+    public User(String firstName, String lastName, String email, String username, String password, String role, String birthdate, String sport, String squadra) {
         this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,6 +34,8 @@ public class User {
         this.password = password;
         this.role = role;
         this.birthdate = birthdate;
+        this.sport = sport;
+        this.squadra = squadra;
     }
 
     public int getId() {return id;}
@@ -40,6 +46,8 @@ public class User {
     public String getPassword() {return password;}
     public String getRole() {return role;}
     public String getBirthdate() {return birthdate;}
+    public String getsport() {return sport;}
+    public String getsquadra() {return squadra;}
 
     public void setId(int id) {this.id = id;}
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -49,4 +57,6 @@ public class User {
     public void setPassword(String password) {this.password = password;}
     public void setRole(String role) {this.role = role;}
     public void setBirthdate(String birthdate) {this.birthdate = birthdate;}
+    public void setSport(String sport) {this.sport = sport;}
+    public void setSquadra(String squadra) {this.squadra = squadra;}
 }

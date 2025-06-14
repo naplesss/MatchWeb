@@ -29,15 +29,13 @@ import java.util.List;
             }
 
             public List<User> findAllUsers () {
-                String sql = "SELECT * FROM USERDATA";
+                String sql = "SELECT * FROM USERDATA JOIN AUTHORITIES ON USERDATA.ID=AUTHORITIES.ID ORDER BY Username";
+
                 RowMapper<User> userRowMapper = (r, i) -> {
                     User rowObject = new User();
-                    rowObject.setId(r.getInt("ID"));
                     rowObject.setUsername(r.getString("USERNAME"));
-                    rowObject.setFirstName(r.getString("FIRSTNAME"));
-                    rowObject.setLastName(r.getString("LASTNAME"));
                     rowObject.setEmail(r.getString("EMAIL"));
-                    rowObject.setBirthdate(r.getString("BIRTHDATE"));
+                    rowObject.setRole(r.getString("AUTHORITY"));
                     return rowObject;
                 };
                 return jdbc.query(sql, userRowMapper);

@@ -2,6 +2,7 @@ package org.example.matcheweb.controllers;
 
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,6 +92,13 @@ public class MainController {
             returnPage = "tuttapposto";
         }
         return returnPage;
+    }
+
+    @PostMapping("/loginFailure")
+    public String loginFallito(Model model) {
+        model.addAttribute("logged", false);
+        model.addAttribute("loginFailed", true);
+        return "/login";
     }
 
 

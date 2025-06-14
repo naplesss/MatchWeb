@@ -9,5 +9,9 @@
 </head>
 <body>
 <div th:replace="~{BarraDiNavigazione.html}"></div>
+<form th:action="@{/logout}" method="post">
+
+    <input type="submit" value="Logout" />
+</form>
 </body>
 </html>

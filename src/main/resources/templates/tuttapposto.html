@@ -9,5 +9,13 @@
 </head>
 <body>
 <div th:replace="~{BarraDiNavigazione.html}"></div>
+<div class="card" style="width: 18rem;">
+    <img th:src="@{/images/pollicione.jpg}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">REGISTRAZIONE ANDATA A BUON FINE</h5>
+        <p class="card-text">ora che la registrazione è andata a buon fine puoi effettuare il login</p>
+        <a th:href="@{/login}" class="btn btn-primary">go login</a>
+    </div>
+</div>
 </body>
 </html>

@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="static/javascript" src='/script.js'></script>
 
     <style></style>
 
@@ -20,6 +21,9 @@
     <!--cognome-->
     <label for="lastName">Last name</label><br>
     <input type="text" id="lastName" name="lastName" value="" required><br><br>
+    <!--data nascita-->
+    <label for="birthdate">data di nascita</label><br>
+    <input type="text" id="birthdate" name="birthdate" value="" required><br><br>
     <!--email-->
     <label for="email">E-mail</label><br>
     <input type="text" id="email" name="email" value="" required><br><br>
@@ -31,25 +35,24 @@
     <!--password contenente 2 numeri, un carattere speciale, lunga almeno 9 caratteri -->
     <input type="password" id="password" name="password"
            pattern="^(?=(.*\d){2,})(?=.*[!@#$%^&*(),.?\:{}|<>]).{9,}$"
-           title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required>
+           title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required><br>
     <!--verify password-->
     <label for="vPassword">Verify Password</label><br>
-    <input type="password" id="vPassword" name="vPassword" required>
+    <input type="password" id="vPassword" required>
     <br><br>
     <label for="sport">Seleziona uno sport:</label>
     <select id="sport" name="sport" required>
-        <option value="1">Tiro alla fune</option>
-        <option value="2">Lacrosse</option>
-        <option value="3">Polo</option>
+        <option value="pipi">Tiro alla fune</option>
+        <option value="popo">Lacrosse</option>
+        <option value="lala">Polo</option>
     </select>
     <br><br>
-    <label for="sport">Seleziona uno sport:</label>
-<!--c'è da fare lo script-->
+    <label for="sportcuore">Seleziona una squadra:</label>
     <select id="sportcuore" name="sportcuore" required >
-        <option value="1">scegli una squadra</option>
-        <option value="2">piera</option>
+        <option value="papa">scegli una squadra</option>
+        <option value="pupu">piera</option>
 
-    </select>
+    </select><br><br>
 
     <input type="submit" value="Sign up">
     <input type="reset" value="reset">

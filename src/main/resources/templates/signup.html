@@ -8,6 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src='/script.js'></script>
+    <style type="text/css" src=""></style>
 
     <style></style>
 
@@ -38,8 +39,14 @@
            title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required
            onkeyup="checkPassword()" onfocus="mostraMessaggio()" onblur="nascondiMessaggio()"><br>
     <button type="button" onclick="mostraPassword('password')" >cliccami ;P</button><br><br>
-    <
-    <!--verify password-->
+<!--    messaggio per la password-->
+    <div id="messaggio" >
+        <h3>La password deve contenere::</h3>
+        <p id="speciali" class="invalid">1 carattere <b>speciale</b> </p>
+        <p id="numeri" class="invalid">2 <b>numeri</b></p>
+        <p id="lunghezza" class="invalid"> <b>8 lettere</b></p>
+    </div>
+    <!--verifica password-->
     <label for="vPassword">Verify Password</label><br>
     <input type="password" id="vPassword" required>
     <br><br>

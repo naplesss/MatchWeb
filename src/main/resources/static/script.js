@@ -68,25 +68,30 @@ function mostraMessaggio(){
     var numeri=/0-9/g;
     let matches = password.value.match(numeri);
     if (matches && matches.length===2){
-        //ok, pingo la sua riga di verde
+        numeri.classList.remove("invalid");
+        numeri.classList.add("valid");
     }
     else{
-        //rimane rossa
+        numeri.classList.remove("valid");
+        numeri.classList.add("invalid");
         bool = false;
     }
 
     var speciali =  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     matches = password.value.match(speciali);
-    if (matches && matches.length===1){
-        //ok, pingo speciali di verde
+    if (matches && matches.length===1) {
+        speciali.classList.remove("invalid");
+        speciali.classList.add("valid");
     }
     else{
-        //pingo di rosso
+        speciali.classList.remove("valid");
+        speciali.classList.add("invalid");
         bool = false;
     }
 
     if(password.value.length===9){
-        //ok, pingo lunghezza di verde
+        lunghezzaB.classList.remove("invalid");
+        lunghezzaB.classList.add("valid");
     }
     else{
         //no, pingo di rosso
@@ -97,6 +102,8 @@ function mostraMessaggio(){
 
 }
 function nascondiMessaggio(){
-
+    document.getElementById("messaggio").style.display = "none";
 }
-function checkPassword(){}
+function checkPassword(){
+    document.getElementById("messaggio").style.display = "block";
+}

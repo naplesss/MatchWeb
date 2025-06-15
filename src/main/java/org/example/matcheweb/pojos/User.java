@@ -11,7 +11,8 @@ public class User {
     private String birthdate;
     private String sport;
     private String squadra;
-
+    private int points;
+    private int rank;
     public User() {
         this.id = 0;
         this.firstName = "";
@@ -23,6 +24,8 @@ public class User {
         this.birthdate = "";
         this.sport = "";
         this.squadra = "";
+        this.points = 0;
+        this.rank = 0;
     }
 
     public User(String firstName, String lastName, String email, String username, String password, String role, String birthdate, String sport, String squadra) {
@@ -36,6 +39,8 @@ public class User {
         this.birthdate = birthdate;
         this.sport = sport;
         this.squadra = squadra;
+        this.points = 0;
+        this.rank = 0;
     }
 
     public int getId() {return id;}
@@ -48,6 +53,8 @@ public class User {
     public String getBirthdate() {return birthdate;}
     public String getsport() {return sport;}
     public String getsquadra() {return squadra;}
+    public int getPunti() {return points;}
+    public int getClassifica() {return rank;}
 
     public void setId(int id) {this.id = id;}
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -59,4 +66,6 @@ public class User {
     public void setBirthdate(String birthdate) {this.birthdate = birthdate;}
     public void setSport(String sport) {this.sport = sport;}
     public void setSquadra(String squadra) {this.squadra = squadra;}
+    public void setPunti(int points) {this.points = points;}
+    public void setClassifica(int rank) {this.rank = rank;}
 }

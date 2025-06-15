@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>DASHBOARD USER</title>
@@ -7,12 +7,20 @@
 <body>
 <p>BENVENUTO/A</p>
 <div class="d-grid gap-2 col-6 mx-auto">
-    <button class="btn btn-primary" type="button">Visualizza profilo</button>
+    <a th:herf="@{/VisualizzaProfilo}">
+        <button class="btn btn-primary" type="button">Visualizza profilo</button>
+    </a>
+    <a th:herf="@{/VisualizzaCalendario}">
     <button class="btn btn-primary" type="button">Visualizza calendario partite</button>
+    </a>
     <button class="btn btn-primary" type="button">Cambio Password</button>
+    <a th:herf="@{/GiocaSchedina}">
     <button class="btn btn-primary" type="button">Gioca schedina</button>
+    </a>
     <button class="btn btn-primary" type="button">Calcola punteggio</button>
+    <a th:herf="@{/recensioni}">
     <button class="btn btn-primary" type="button">Recensioni</button>
+    </a>
 </div>
 </body>
 </html>

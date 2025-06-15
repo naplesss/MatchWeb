@@ -19,4 +19,9 @@ public class AdminController {
         model.addAttribute("users", userRepository.findAllUsers());
         return "ListaUtentiIscritti";
     }
+    @GetMapping("/ClassificaUtenti")
+    public String ClassificaUtenti(Model model){
+        model.addAttribute("ListaUtenti", userRepository.getClassificaUtenti());
+        return "segments/adminActions/ListaUtenti";
+    }
 }

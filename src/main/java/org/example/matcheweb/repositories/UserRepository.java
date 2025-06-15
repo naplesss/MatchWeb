@@ -55,4 +55,16 @@ import java.util.List;
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userDetailsManager.createUser(new SecurityUser(user));
             }
+            public List<User> getClassificaUtenti (){
+            String sql = "SELECT username,SUM (points) AS points FROM (SELECT username,points FROM POINTS JOIN USERDATA ON POINTS.ID=USERDATA.ID ORDER BY points DESC) AS subquery GROUP BY username";
+            RowMapper<User> rankingRowMapper = (r,i)->{
+                User user = new User();
+                user.setUsername(r.getString("usernsme"));
+                user.setPunti(r.getInt("tot_punti"));
+                    user.setClassifica(i + 1);
+                    return user;
+                };
+            return jdbc.query(sql,rankingRowMapper);
+            }
+
     }

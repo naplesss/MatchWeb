@@ -117,6 +117,12 @@ public class MainController {
         return ("News");
     }
 
+    @GetMapping("/dashboardUser")
+    public String dashboardUser() {return "DashboardUser";}
+
+    @GetMapping("/dashboardAdmin")
+    public String dashboardAdmin() {return "DashboardAdmin";}
+
 
 
 }

@@ -36,28 +36,37 @@ const teamSelect = document.getElementById('sportcuore');
 //     }
 // });
 
+//mostra la password o la nasconde
 function mostraPassword(id) {
     var password = document.getElementById(id);
     if (password.type === "password") {
         password.type = "text";
     } else {
-        x.type = "password";
+        password.type = "password";
     }
 }
 
 function matchpassword(passwordId, checkId){
     var password = document.getElementById(passwordId).value;
     var check = document.getElementById(checkId).value;
+    var uguale = document.getElementById('uguale');
+    var bool = true;
 
-    if (password == check){
-        //sarà verde
+    if (password === check){
+        uguale.classList.remove('invalid');
+        uguale.classList.add('valid');
+        uguale.textContent = 'le password sono uguali';
     }
     else{
-        //sarà rosso
+        uguale.classList.remove('valid');
+        uguale.classList.add('invalid');
+        uguale.textContent = 'le password non sono uguali';
+        bool = false;
     }
+    return bool;
 }
 
-function mostraMessaggio(){
+function checkPassword(){
     var password = document.getElementById('password');
     var numeriB = document.getElementById('numeri');//la barra dei numeri
     var specialiB = document.getElementById('speciali');//barra dei caratteri speciali
@@ -65,27 +74,27 @@ function mostraMessaggio(){
     var bool = true;
 
 
-    var numeri=/0-9/g;
+    var numeri=/[0-9]/g;
     let matches = password.value.match(numeri);
     if (matches && matches.length===2){
-        numeri.classList.remove("invalid");
-        numeri.classList.add("valid");
+        numeriB.classList.remove("invalid");
+        numeriB.classList.add("valid");
     }
     else{
-        numeri.classList.remove("valid");
-        numeri.classList.add("invalid");
+        numeriB.classList.remove("valid");
+        numeriB.classList.add("invalid");
         bool = false;
     }
 
     var speciali =  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     matches = password.value.match(speciali);
     if (matches && matches.length===1) {
-        speciali.classList.remove("invalid");
-        speciali.classList.add("valid");
+        specialiB.classList.remove("invalid");
+        specialiB.classList.add("valid");
     }
     else{
-        speciali.classList.remove("valid");
-        speciali.classList.add("invalid");
+        specialiB.classList.remove("valid");
+        specialiB.classList.add("invalid");
         bool = false;
     }
 
@@ -94,16 +103,17 @@ function mostraMessaggio(){
         lunghezzaB.classList.add("valid");
     }
     else{
-        //no, pingo di rosso
+        lunghezzaB.classList.remove("valid");
+        lunghezzaB.classList.add("invalid");
         bool = false;
     }
 
     return bool;
 
 }
-function nascondiMessaggio(){
-    document.getElementById("messaggio").style.display = "none";
+function nascondiMessaggio(id){
+    document.getElementById(id).style.display = "none";
 }
-function checkPassword(){
-    document.getElementById("messaggio").style.display = "block";
+function mostraMessaggio(id){
+    document.getElementById(id).style.display = "block";
 }

@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src='/script.js'></script>
-    <style type="text/css" src=""></style>
+    <link rel="stylesheet" href="/style.css">
 
     <style></style>
 
@@ -37,19 +37,26 @@
     <input type="password" id="password" name="password"
            pattern="^(?=(.*\d){2,})(?=.*[!@#$%^&*(),.?\:{}|<>]).{9,}$"
            title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required
-           onkeyup="checkPassword()" onfocus="mostraMessaggio()" onblur="nascondiMessaggio()"><br>
+           onkeyup="checkPassword()" onfocus="mostraMessaggio('messaggio')" onblur="nascondiMessaggio('messaggio')">
     <button type="button" onclick="mostraPassword('password')" >cliccami ;P</button><br><br>
 <!--    messaggio per la password-->
-    <div id="messaggio" >
-        <h3>La password deve contenere::</h3>
+    <div id="messaggio" style="display: none">
+        <h3>La password deve contenere:</h3>
         <p id="speciali" class="invalid">1 carattere <b>speciale</b> </p>
         <p id="numeri" class="invalid">2 <b>numeri</b></p>
         <p id="lunghezza" class="invalid"> <b>8 lettere</b></p>
-    </div>
+    </div><br><br>
     <!--verifica password-->
     <label for="vPassword">Verify Password</label><br>
-    <input type="password" id="vPassword" required>
-    <br><br>
+    <input type="password" id="vPassword" onblur="nascondiMessaggio('testoVerifica')" onclick="mostraMessaggio('testoVerifica')"
+           onkeyup="matchpassword('password','vPassword')" required>
+<!--    bottone mostra password-->
+    <button type="button" onfocus="mostraPassword('vPassword')" >cliccami ;P</button><br><br>
+<!--    testo di verifica password-->
+    <div id="testoVerifica" style="display: none" >
+        <p id="uguale" class="invalid">le password non sono uguali/</p>
+    </div><br><br>
+<!--    scelta dello sport-->
     <label for="sport">Seleziona uno sport:</label>
     <select id="sport" name="sport" required>
         <option value="pipi">Tiro alla fune</option>
@@ -57,13 +64,14 @@
         <option value="lala">Polo</option>
     </select>
     <br><br>
+<!--    scelta della squadra del cuore-->
     <label for="sportcuore">Seleziona una squadra:</label>
     <select id="sportcuore" name="sportcuore" required >
         <option value="papa">scegli una squadra</option>
         <option value="pupu">piera</option>
 
     </select><br><br>
-
+<!--submit e reset-->
     <input type="submit" value="Sign up">
     <input type="reset" value="reset">
 </form>

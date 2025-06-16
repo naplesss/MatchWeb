@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CATALOG>
     <CD>
-        <TITLE>Empire Burlesque</TITLE>
-        <ARTIST>Bob Dylan</ARTIST>
-        <COUNTRY>USA</COUNTRY>
-        <COMPANY>Columbia</COMPANY>
+        <TITLE>POLO</TITLE>
+        <AZIONE>BRAKING NEWS! unicorni non ammessi ai match ufficiali</AZIONE>
+        <COUNTRY>IRLANDA</COUNTRY>
         <PRICE>10.90</PRICE>
-        <YEAR>1985</YEAR>
+        <YEAR>2025</YEAR>
     </CD>
     <CD>
-        <TITLE>Hide your heart</TITLE>
-        <ARTIST>Bonnie Tyler</ARTIST>
+        <TITLE>LACROSSE</TITLE>
+        <AZIONE>appena rilasciato nuovo regolamento su racchette utilizzabili</AZIONE>
         <COUNTRY>UK</COUNTRY>
-        <COMPANY>CBS Records</COMPANY>
-        <PRICE>9.90</PRICE>
-        <YEAR>1988</YEAR>
+        <YEAR>2025</YEAR>
     </CD>
     <CD>
-        <TITLE>Greatest Hits</TITLE>
-        <ARTIST>Dolly Parton</ARTIST>
+        <TITLE>TIRO ALLA FUNE</TITLE>
+        <AZIONE>Come affrontare la sindrome del tunel carpale tips and tricks</AZIONE>
         <COUNTRY>USA</COUNTRY>
-        <COMPANY>RCA</COMPANY>
-        <PRICE>9.90</PRICE>
-        <YEAR>1982</YEAR>
+        <YEAR>2025</YEAR>
     </CD>
 
 </CATALOG>

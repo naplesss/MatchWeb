@@ -44,11 +44,11 @@ public class SecurityConfig {
         // Authorization
         http.authorizeHttpRequests(c ->
                 c.requestMatchers("/dashboard").hasAnyRole("ADMIN", "USER", "MODERATOR")
-                        .requestMatchers("/userDashboard").hasAnyRole( "USER", "MODERATOR")
+                        .requestMatchers("/dashboardUser").hasAnyRole( "USER", "MODERATOR")
                         .requestMatchers("/compute").hasAnyRole("USER","MODERATOR")
                         .requestMatchers("/datetime").hasAnyRole("USER","MODERATOR")
                         .requestMatchers("/externalDateTime").hasAnyRole( "USER","MODERATOR")
-                        .requestMatchers("/adminDashboard").hasRole("ADMIN")
+                        .requestMatchers("/dashboardAdmin").hasRole("ADMIN")
                         .requestMatchers("/getUsers").hasRole("ADMIN")
                         .anyRequest().permitAll()
         );

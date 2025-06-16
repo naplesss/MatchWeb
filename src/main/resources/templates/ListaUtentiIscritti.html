@@ -12,7 +12,7 @@
         <th>Email</th>
         <th>Ruolo</th>
     </tr>
-    <tr th:each="user : ${users}">
+    <tr th:each="user : ${userdata}">
         <td th:text="${user.username}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.role}"></td>

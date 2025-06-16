@@ -118,7 +118,4 @@ function mostraMessaggio(id){
     document.getElementById(id).style.display = "block";
 }
 
-//funzione per vedere se non ci sono altri user con lo stesso username
-function controllaNome(){
 
-}

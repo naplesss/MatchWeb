@@ -2,13 +2,13 @@ package org.example.matcheweb.controllers;
 
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -82,11 +82,11 @@ public class MainController {
                           @RequestParam String sportcuore,
                           Model model) {
         String returnPage;
-        //cambiare signup failure
+        // signup failure
         if (userRepository.userExists(username)) {
-            System.out.println("User already exists");
             model.addAttribute("username", username);
-            returnPage = "signupFailure";
+            model.addAttribute("erroreNome", "Username già esistente! Scegli un altro nome utente.");
+            returnPage = "signup";
         } else {
             userRepository.addUser(new User(firstName, lastName, email, username, password, "ROLE_USER", birthdate, sport, sportcuore));
             model.addAttribute("username", username);
@@ -99,7 +99,7 @@ public class MainController {
     public String loginFallito(Model model) {
         model.addAttribute("logged", false);
         model.addAttribute("loginFailed", true);
-        return "/login";
+        return "/index";
     }
 //roba di gaia per admin dashbpard
     @GetMapping("/ListaUtentiIscritti")
@@ -118,10 +118,29 @@ public class MainController {
     }
 
     @GetMapping("/dashboardUser")
-    public String dashboardUser() {return "DashboardUser";}
+    public String userDashboard(Authentication authentication, Model model) {
+        model.addAttribute("name", authentication.getName());
+        return "DashboardUser";
+    }
 
     @GetMapping("/dashboardAdmin")
-    public String dashboardAdmin() {return "DashboardAdmin";}
+    public String adminDashboard(Authentication authentication, Model model) {
+        model.addAttribute("name", authentication.getName());
+        return "DashboardAdmin";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(Authentication authentication) {
+        String returnPage;
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            returnPage = "forward:dashboardAdmin";
+        } else {
+            returnPage = "forward:dashboardUser";
+        }
+        return returnPage;
+    }
+
+
 
 
 

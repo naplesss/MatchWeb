@@ -30,9 +30,9 @@
     <input type="text" id="email" name="email" value="" required><br><br>
     <!--Username-->
     <label for="username">Username</label><br>
-    <input type="text" id="username" name="username" value="" required
-           onfocus="mostraMessaggio('usernome')" onblur="nascondiMessaggio('usernome')" onkeyup="controllaNome()"><br><br>
-        <p  id="usernome" style="display: none"></p>
+    <input type="text" id="username" name="username" value="" required><br><br>
+<!--    errore nome uguale-->
+    <div th:if="${erroreNome}" class="alert alert-danger" th:text="${erroreNome}"></div>
     <!-- password-->
     <label for="password">Password</label><br>
     <!--password contenente 2 numeri, un carattere speciale, lunga almeno 9 caratteri -->

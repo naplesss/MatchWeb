@@ -101,7 +101,7 @@ public class MainController {
         model.addAttribute("loginFailed", true);
         return "/login";
     }
-
+//roba di gaia per admin dashbpard
     @GetMapping("/ListaUtentiIscritti")
     public String getUsers(Authentication authentication, Model model) {
         String name = authentication.getName();

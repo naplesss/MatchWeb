@@ -19,22 +19,6 @@ const sportSelect = document.getElementById('sport');
 const teamSelect = document.getElementById('sportcuore');
 
 
-// sportSelect.addEventListener('change', function() {
-//     const selectedSport = this.value;
-//     teamSelect.innerHTML = '<option value="" selected disabled>Choose a team</option>';
-//
-//     if (selectedSport) {
-//         teamSelect.disabled = false;
-//         teamsBySport[selectedSport].forEach((team, index) => {
-//             const option = document.createElement('option');
-//             option.value = index + 1; // or use actual team IDs
-//             option.textContent = team;
-//             teamSelect.appendChild(option);
-//         });
-//     } else {
-//         teamSelect.disabled = true;
-//     }
-// });
 
 //mostra la password o la nasconde
 function mostraPassword(id) {
@@ -118,4 +102,16 @@ function mostraMessaggio(id){
     document.getElementById(id).style.display = "block";
 }
 
-
+// function setTeamSelection(sport) {
+//     let dataList = document.getElementById("sportcuore");
+//     dataList.innerHTML = "";
+//     let teamList = JSON.parse(document.getElementById("sportcuore").getAttribute("data-team-list"));
+//     teamList.forEach(element => {
+//         if (element.sport === sport) {
+//             const option = document.createElement("option");
+//             option.value = element.nomesquadra;
+//             option.textContent = element.nomesquadra;
+//             dataList.appendChild(option);
+//         }
+//     });
+// }

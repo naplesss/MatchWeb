@@ -112,6 +112,10 @@ public class MainController {
         else
             return ("index");
     }
+    @GetMapping("/News")
+    public String getNews(){
+        return ("News");
+    }
 
 
 

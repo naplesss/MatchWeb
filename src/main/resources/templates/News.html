@@ -1,252 +1,92 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Sportive Live</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h2 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #news-container {
-            margin-top: 30px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            background-color: #f9f9f9;
-        }
-
-        .news-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .refresh-btn {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .refresh-btn:hover {
-            background-color: #2980b9;
-        }
-
-        #last-update {
-            font-size: 0.9em;
-            color: #7f8c8d;
-        }
-
-        table {
-            width: 100%;
+        table,th,td {
+            border : 1px solid black;
             border-collapse: collapse;
         }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .winner {
-            font-weight: bold;
-            color: #27ae60;
-        }
-
-        .live {
-            color: #e74c3c;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #7f8c8d;
-        }
-
-        .error {
-            color: #e74c3c;
-            text-align: center;
-            padding: 20px;
+        th,td {
+            padding: 5px;
         }
     </style>
+
+    <script>
+        var currentCD = 0;
+        var cdData = null;
+        var autoRefresh = true;
+
+        function loadDoc(showAll = false) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status ==200) {
+                    cdData = this.responseXML.getElementsByTagName("CD");
+                    if(showAll) {
+                        showAllCDs();
+                    } else {
+                        showNextCD();
+                    }
+                }
+            };
+            xhttp.open("GET", "./CatalogoNews.xml", true);
+            xhttp.send();
+        }
+
+        function showNextCD() {
+            if (!cdData || cdData.length === 0) return;
+
+            var cd = cdData[currentCD];
+            let table="<tr><th>Artist</th><th>Title</th></tr>";
+            table = table + "<tr><td>" +
+                cd.getElementsByTagName("ARTIST")[0].innerHTML +
+                "</td><td>" +
+                cd.getElementsByTagName("TITLE")[0].innerHTML +
+                "</td></tr>";
+            document.getElementById("demo").innerHTML = table;
+
+            currentCD = (currentCD + 1) % cdData.length;
+
+            if(autoRefresh) {
+                setTimeout(showNextCD, 30000);
+            }
+        }
+
+       /*function showAllCDs() {
+            autoRefresh = false; // Disabilita l'auto-refresh quando mostri tutto
+            if (!cdData || cdData.length === 0) return;
+
+            let table="<tr><th>Artist</th><th>Title</th></tr>";
+            for (let i = 0; i < cdData.length; i++) {
+                table = table + "<tr><td>" +
+                    cdData[i].getElementsByTagName("ARTIST")[0].innerHTML +
+                    "</td><td>" +
+                    cdData[i].getElementsByTagName("TITLE")[0].innerHTML +
+                    "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+
+            // Ripristina l'auto-refresh dopo 30 secondi
+            setTimeout(function() {
+                autoRefresh = true;
+                showNextCD();
+            }, 30000);
+        }*/
+
+        // Carica i dati al caricamento della pagina e inizia il ciclo
+        window.onload = function() {
+            loadDoc();
+        };
+    </script>
+
 </head>
+
 <body>
 
-<h2>Ultimi Risultati Sportivi</h2>
+<h2>The XMLHttpRequest Object</h2>
 
-<div id="news-container">
-    <div class="news-header">
-        <button class="refresh-btn" onclick="loadSportsNews()">Aggiorna</button>
-        <div id="last-update"></div>
-    </div>
-    <div id="sports-results">
-        <div class="loading">Caricamento risultati in corso...</div>
-    </div>
-</div>
-
-<script>
-    // Variabile per l'intervallo di aggiornamento
-    let refreshInterval;
-
-    // Funzione per caricare i risultati sportivi
-    function loadSportsNews() {
-        const resultsContainer = document.getElementById('sports-results');
-        resultsContainer.innerHTML = '<div class="loading">Caricamento risultati in corso...</div>';
-
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (this.readyState === 4) {
-                if (this.status === 200) {
-                    try {
-                        displaySportsResults(this);
-                        updateLastUpdateTime();
-                    } catch (error) {
-                        showError("Errore nel parsing dei dati");
-                    }
-                } else {
-                    showError("Errore nel caricamento dei dati");
-                }
-            }
-        };
-
-        xhr.open("GET", "./sports_results.xml", true);
-        xhr.send();
-    }
-
-    // Funzione per visualizzare i risultati
-    function displaySportsResults(xmlResponse) {
-        const xmlDoc = xmlResponse.responseXML;
-        const matches = xmlDoc.getElementsByTagName("match");
-        const resultsContainer = document.getElementById('sports-results');
-
-        if (matches.length === 0) {
-            resultsContainer.innerHTML = '<div class="error">Nessun risultato disponibile</div>';
-            return;
-        }
-
-        let tableHTML = `
-            <table>
-                <thead>
-                    <tr>
-                        <th>Campionato</th>
-                        <th>Partita</th>
-                        <th>Risultato</th>
-                        <th>Stato</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
-        for (let i = 0; i < matches.length; i++) {
-            const match = matches[i];
-            const homeTeam = getElementValue(match, "home_team");
-            const awayTeam = getElementValue(match, "away_team");
-            const homeScore = getElementValue(match, "home_score");
-            const awayScore = getElementValue(match, "away_score");
-            const competition = getElementValue(match, "competition");
-            const status = getElementValue(match, "status");
-
-            const isHomeWinner = parseInt(homeScore) > parseInt(awayScore);
-            const isAwayWinner = parseInt(awayScore) > parseInt(homeScore);
-
-            tableHTML += `
-                <tr>
-                    <td>${competition}</td>
-                    <td>
-                        <span class="${isHomeWinner ? 'winner' : ''}">${homeTeam}</span> vs
-                        <span class="${isAwayWinner ? 'winner' : ''}">${awayTeam}</span>
-                    </td>
-                    <td>${homeScore} - ${awayScore}</td>
-                    <td class="${status === 'LIVE' ? 'live' : ''}">
-                        ${getStatusText(status)}
-                    </td>
-                </tr>
-            `;
-        }
-
-        tableHTML += `
-                </tbody>
-            </table>
-        `;
-
-        resultsContainer.innerHTML = tableHTML;
-    }
-
-    // Funzione helper per ottenere il valore di un elemento XML
-    function getElementValue(parent, tagName) {
-        const elements = parent.getElementsByTagName(tagName);
-        return elements.length > 0 ? elements[0].textContent : '';
-    }
-
-    // Funzione per tradurre lo stato della partita
-    function getStatusText(status) {
-        const statusMap = {
-            'FT': 'Terminata',
-            'HT': 'Primo Tempo',
-            'LIVE': 'In Diretta',
-            'NS': 'Da Giocare'
-        };
-        return statusMap[status] || status;
-    }
-
-    // Funzione per mostrare errori
-    function showError(message) {
-        document.getElementById('sports-results').innerHTML = `
-            <div class="error">${message}</div>
-        `;
-    }
-
-    // Funzione per aggiornare l'ora dell'ultimo aggiornamento
-    function updateLastUpdateTime() {
-        const now = new Date();
-        document.getElementById('last-update').textContent =
-            `Ultimo aggiornamento: ${now.toLocaleTimeString()}`;
-    }
-
-    // Carica i risultati al caricamento della pagina
-    window.onload = function() {
-        loadSportsNews();
-
-        // Imposta l'aggiornamento automatico ogni 30 secondi
-        refreshInterval = setInterval(loadSportsNews, 30000);
-    };
-
-    // Pulizia quando la pagina viene chiusa
-    window.onbeforeunload = function() {
-        clearInterval(refreshInterval);
-    };
-</script>
+<button type="button" onclick="loadDoc(true)">Get my CD collection</button>
+<br><br>
+<table id="demo"></table>
 
 </body>
 </html>

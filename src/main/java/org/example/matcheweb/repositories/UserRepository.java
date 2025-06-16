@@ -8,6 +8,9 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 
@@ -56,7 +59,7 @@ import java.util.List;
                 userDetailsManager.createUser(new SecurityUser(user));
             }
             public List<User> getClassificaUtenti (){
-            String sql = "SELECT username,SUM (points) AS points FROM (SELECT username,points FROM POINTS JOIN USERDATA ON POINTS.ID=USERDATA.ID ORDER BY points DESC) AS subquery GROUP BY username";
+            String sql = "SELECT username,SUM (punti) AS points FROM (SELECT username,punti FROM PUNTI JOIN USERDATA ON PUNTI.ID=USERDATA.ID ORDER BY punti DESC) AS subquery GROUP BY username";
             RowMapper<User> rankingRowMapper = (r,i)->{
                 User user = new User();
                 user.setUsername(r.getString("usernsme"));
@@ -65,6 +68,13 @@ import java.util.List;
                     return user;
                 };
             return jdbc.query(sql,rankingRowMapper);
+            }
+
+            public boolean isMaggiorenne(Date birthdate){
+               int compleanno = birthdate.toLocalDate().getYear();
+                int annoCorrente = LocalDate.now().getYear();
+                return annoCorrente-compleanno <= 18;
+
             }
 
     }

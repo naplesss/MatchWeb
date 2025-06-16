@@ -24,7 +24,8 @@
     <input type="text" id="lastName" name="lastName" value="" required><br><br>
     <!--data nascita-->
     <label for="birthdate">data di nascita</label><br>
-    <input type="text" id="birthdate" name="birthdate" value="" required><br><br>
+    <input type="date" id="birthdate" name="birthdate" value="" required><br><br>
+    <div th:if="${erroreData}" class="alert alert-danger" th:text="${erroreData}"></div>
     <!--email-->
     <label for="email">E-mail</label><br>
     <input type="text" id="email" name="email" value="" required><br><br>
@@ -61,9 +62,9 @@
 <!--    scelta dello sport-->
     <label for="sport">Seleziona uno sport:</label>
     <select id="sport" name="sport" required>
-        <option value="pipi">Tiro alla fune</option>
-        <option value="popo">Lacrosse</option>
-        <option value="lala">Polo</option>
+        <option value="fune">Tiro alla fune</option>
+        <option value="lacrosse">Lacrosse</option>
+        <option value="polo">Polo</option>
     </select>
     <br><br>
 <!--    scelta della squadra del cuore-->

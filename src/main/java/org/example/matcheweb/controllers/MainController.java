@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.sql.Date;
+
+
 @Controller
 public class MainController {
     private final UserRepository userRepository;
@@ -74,7 +77,7 @@ public class MainController {
     @PostMapping("/addUser")
     public String addUser(@RequestParam String firstName,
                           @RequestParam String lastName,
-                          @RequestParam String birthdate,
+                          @RequestParam Date birthdate,
                           @RequestParam String email,
                           @RequestParam String username,
                           @RequestParam String password,
@@ -87,6 +90,10 @@ public class MainController {
             model.addAttribute("username", username);
             model.addAttribute("erroreNome", "Username già esistente! Scegli un altro nome utente.");
             returnPage = "signup";
+        } else if (userRepository.isMaggiorenne(birthdate)) {
+            model.addAttribute("erroreData", "l'utente deve essere maggiorenne");
+            returnPage = "signup";
+            
         } else {
             userRepository.addUser(new User(firstName, lastName, email, username, password, "ROLE_USER", birthdate, sport, sportcuore));
             model.addAttribute("username", username);

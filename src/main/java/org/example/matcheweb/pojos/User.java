@@ -1,5 +1,9 @@
 package org.example.matcheweb.pojos;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
+
 public class User {
     private int id;
     private String firstName;
@@ -8,7 +12,7 @@ public class User {
     private String username;
     private String password;
     private String role;
-    private String birthdate;
+    private Date birthdate;
     private String sport;
     private String squadra;
     private int points;
@@ -21,14 +25,14 @@ public class User {
         this.username = "";
         this.password = "";
         this.role = "";
-        this.birthdate = "";
+        this.birthdate = null;
         this.sport = "";
         this.squadra = "";
         this.points = 0;
         this.rank = 0;
     }
 
-    public User(String firstName, String lastName, String email, String username, String password, String role, String birthdate, String sport, String squadra) {
+    public User(String firstName, String lastName, String email, String username, String password, String role, Date birthdate, String sport, String squadra) {
         this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,7 +54,7 @@ public class User {
     public String getUsername() {return username;}
     public String getPassword() {return password;}
     public String getRole() {return role;}
-    public String getBirthdate() {return birthdate;}
+    public Date getBirthdate() {return birthdate;}
     public String getsport() {return sport;}
     public String getsquadra() {return squadra;}
     public int getPunti() {return points;}
@@ -63,7 +67,7 @@ public class User {
     public void setUsername(String username) {this.username = username;}
     public void setPassword(String password) {this.password = password;}
     public void setRole(String role) {this.role = role;}
-    public void setBirthdate(String birthdate) {this.birthdate = birthdate;}
+    public void setBirthdate(Date birthdate) {this.birthdate = birthdate;}
     public void setSport(String sport) {this.sport = sport;}
     public void setSquadra(String squadra) {this.squadra = squadra;}
     public void setPunti(int points) {this.points = points;}

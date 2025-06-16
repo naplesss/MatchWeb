@@ -1,19 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>DASHBOARD ADMIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-<p>BENVENUTO/A</p>
-<div class="d-grid gap-2 col-6 mx-auto">
-  <a th:herf="@{/ListaUtentiIscritti}" >
-      <button class="btn btn-primary" type="button">Visualizza lista utenti iscritti</button>
-  </a>
-    <button class="btn btn-primary" type="button">Visualizza classifica utenti</button>
-    <button class="btn btn-primary" type="button">Assegna premi</button>
-    <button class="btn btn-primary" type="button">Upgrade</button>
-
+<h1>Welcome in your administration dashboard, <span th:text="${name}"></span>!</h1>
+<br><br>
+<form th:action="@{/getUsers}" method="get">
+    <button type="submit">Get the list of users</button>
+</form>
+<div th:if="${ not#lists.isEmpty(users)}">
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+    </table>
 </div>
+
+<form th:action="@{/perform_logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

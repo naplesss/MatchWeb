@@ -8,10 +8,7 @@
 
 </head>
 <body>
-<div th:replace="~{BarraDiNavigazione.html}"></div>
-<form th:action="@{/logout}" method="post">
-
-    <input type="submit" value="Logout" />
-</form>
+<div th:replace="~{NavBarUser.html}"></div>
+<a th:href="@{/perform_logout}" class="btn btn-primary" id="logout-btn">Log out</a>
 </body>
 </html>

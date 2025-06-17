@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
+import java.util.List;
 
 
 @Controller
@@ -47,10 +48,7 @@ public class MainController {
     }
 
     // logout
-    @GetMapping("/logout")
-    public String logout() {
-        return "logout";
-    }
+
 
     // polo
     @GetMapping("/polo")
@@ -104,9 +102,10 @@ public class MainController {
 
     @PostMapping("/loginFailure")
     public String loginFallito(Model model) {
-        model.addAttribute("logged", false);
-        model.addAttribute("loginFailed", true);
-        return "/index";
+
+            model.addAttribute("erroreNome", "username o password non corretti");
+
+        return "login";
     }
 //roba di gaia per admin dashbpard
     @GetMapping("/ListaUtentiIscritti")
@@ -147,7 +146,16 @@ public class MainController {
         return returnPage;
     }
 
+    @GetMapping("/perform_logout")
+    public String logoutPage(Model model) {
+        model.addAttribute("logged", true);
+        return "index";
+    }
 
+    @GetMapping("/logout")
+    public String logout(Authentication authentication) { authentication.setAuthenticated(false);
+        return "logout";
+    }
 
 
 

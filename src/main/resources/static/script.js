@@ -19,22 +19,6 @@ const sportSelect = document.getElementById('sport');
 const teamSelect = document.getElementById('sportcuore');
 
 
-// sportSelect.addEventListener('change', function() {
-//     const selectedSport = this.value;
-//     teamSelect.innerHTML = '<option value="" selected disabled>Choose a team</option>';
-//
-//     if (selectedSport) {
-//         teamSelect.disabled = false;
-//         teamsBySport[selectedSport].forEach((team, index) => {
-//             const option = document.createElement('option');
-//             option.value = index + 1; // or use actual team IDs
-//             option.textContent = team;
-//             teamSelect.appendChild(option);
-//         });
-//     } else {
-//         teamSelect.disabled = true;
-//     }
-// });
 
 //mostra la password o la nasconde
 function mostraPassword(id) {

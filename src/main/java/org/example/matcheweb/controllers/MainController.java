@@ -2,8 +2,7 @@ package org.example.matcheweb.controllers;
 
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.example.matcheweb.repositories.recensioneRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -12,15 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
-import java.util.List;
 
 
 @Controller
 public class MainController {
     private final UserRepository userRepository;
+    private final recensioneRepository recensioneRepository;
 
-    MainController(UserRepository userRepository) {
+    MainController(UserRepository userRepository, recensioneRepository recensioneRepository) {
         this.userRepository = userRepository;
+        this.recensioneRepository = recensioneRepository;
     }
 
     //home page
@@ -47,8 +47,6 @@ public class MainController {
         return "tuttapposto";
     }
 
-    // logout
-
 
     // polo
     @GetMapping("/polo")
@@ -68,9 +66,12 @@ public class MainController {
     @GetMapping("/sponsor")
     public String sponsor() {return "sponsor";}
 
-    //recensioni
-    @GetMapping("/recensioni")
-    public String recensioni() {return "recensioni";}
+    //recensioni da recenssire
+    @GetMapping("/recensioneuser")
+    public String recensioni() {return "recensioniUser";}
+    //recensioni da leggere
+    @GetMapping("/recensioniglobale")
+    public String recensioniGlobale() {return "RecensioniGlobale";}
 
     @PostMapping("/addUser")
     public String addUser(@RequestParam String firstName,
@@ -155,6 +156,17 @@ public class MainController {
     @GetMapping("/logout")
     public String logout(Authentication authentication) { authentication.setAuthenticated(false);
         return "logout";
+    }
+
+    @PostMapping ("/recensione")
+    public String addRecensione(@RequestParam int voto, @RequestParam String commento, Authentication authentication) {
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+
+            recensioneRepository.addRecensione(user.getId(), voto, commento);
+        }
+        return "redirect:/recensioneuser";
     }
 
 

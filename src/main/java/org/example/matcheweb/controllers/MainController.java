@@ -168,7 +168,16 @@ public class MainController {
         }
         return "redirect:/recensioneuser";
     }
-
+    @GetMapping("/Listarecensionii")
+    public String getRecensioni(Authentication authentication, Model model) {
+        String id = authentication.getId();
+        if (id != null) {
+            model.addAttribute("id",id);
+            model.addAttribute("recensioni",recensioneRepository.findAllRecensioni());
+            return ("recensioni");}
+        else
+            return ("recensioni");
+    }
 
 
 }

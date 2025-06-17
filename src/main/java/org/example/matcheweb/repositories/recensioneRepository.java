@@ -1,7 +1,11 @@
 package org.example.matcheweb.repositories;
 
+import org.example.matcheweb.pojos.Recensione;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository
@@ -15,5 +19,17 @@ public class recensioneRepository {
     public void addRecensione(int userId, int voto, String commento) {
         String sql = "INSERT INTO RECENSIONI (USER_ID, VOTO, COMMENTO) VALUES (?, ?, ?)";
         jdbc.update(sql, userId, voto, commento);
+    }
+    public List<Recensione> findAllRecensioni(int userId){
+        String sql = "SELECT * FROM RECENSIONI WHERE USER_ID = ?";
+        RowMapper<Recensione> RecensioneRowMapper = (r,i)->{
+            Recensione RowObject = new Recensione();
+            RowObject.setId(r.getInt("id"));
+            RowObject.setUserId(r.getInt("user_id"));
+            RowObject.setVoto(r.getInt("voto"));
+            RowObject.setCommento(r.getString("commento"));
+            return RowObject;
+        };
+        return jdbc.query(sql,RecensioneRowMapper,userId);
     }
 }

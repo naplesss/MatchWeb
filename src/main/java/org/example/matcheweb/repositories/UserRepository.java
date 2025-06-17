@@ -45,7 +45,6 @@ import java.util.List;
                 };
                 return jdbc.query(sql, userRowMapper);
             }
-            public List<>
 
             public void addUser (User user){
                 String sql = "INSERT INTO USERDATA VALUES (DEFAULT, ?, ?, ?, ?,?, ?, ?)";

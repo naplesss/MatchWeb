@@ -23,7 +23,7 @@ public class AdminController {
             model.addAttribute("users", userRepository.findAllUsers());
             return ("DashboardAdmin");}
         else
-            return ("index");
+            return ("DashboardAdmin");
     }
     /*@GetMapping("/ListaUtenti")
     public String ListaUtenti(Model model){

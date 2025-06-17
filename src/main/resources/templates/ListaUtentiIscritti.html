@@ -2,9 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>LISTA UTENTI</title>
 </head>
 <body>
+<form th:action="@{/getUsers}" method="get">
+    <button type="submit">Get the list of users</button>
+</form>
+<br><br>
+<div th:if="${ not#lists.isEmpty(userdata)}">
+    <h1>Lista Utenti Iscritti</h1>
+</div>
+<br><br>
+<div th:if="${ not#lists.isEmpty(userdata)}">
+    <h1>Lista Utenti Iscritti</h1>
+</div>
 <table>
     <tr>
         <th>Utente</th>

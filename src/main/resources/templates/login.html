@@ -16,11 +16,21 @@
     <form th:action="@{/login}" method="post">
         <div>
             <input type="text" name="username" id="username" placeholder="Username" required/>
+        </div><br><br>
+        <div>
+            <input type="password" id="password" name="password" placeholder="Password"
+                   pattern="^(?=(.*\d){2,})(?=.*[!@#$%^&*(),.?\:{}|<>]).{9,}$"
+                   title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri"
+                   onkeyup="checkPassword()" onfocus="mostraMessaggio('messaggio')" onblur="nascondiMessaggio('messaggio')"required>
         </div>
         <div th:if="${erroreNome}" class="alert alert-danger" th:text="${erroreNome}"></div>
-        <div>
-            <input type="password" id="password" name="password" placeholder="Password" pattern="^(?=(.*\d){2,})(?=.*[!@#$%^&*(),.?\:{}|<>]).{9,}$" title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri" required>
-        </div>
+        <br>
+        <div id="messaggio" style="display: none">
+            <h3>La password deve contenere:</h3>
+            <p id="speciali" class="invalid">1 carattere <b>speciale</b> </p>
+            <p id="numeri" class="invalid">2 <b>numeri</b></p>
+            <p id="lunghezza" class="invalid"> <b>8 lettere</b></p>
+        </div><br><br>
         <input type="submit" value="Login" />
         <input type="reset" value="reset">
     </form>

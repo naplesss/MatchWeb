@@ -48,10 +48,7 @@ public class MainController {
     }
 
     // logout
-    @GetMapping("/logout")
-    public String logout() {
-        return "logout";
-    }
+
 
     // polo
     @GetMapping("/polo")
@@ -147,6 +144,17 @@ public class MainController {
             returnPage = "forward:dashboardUser";
         }
         return returnPage;
+    }
+
+    @GetMapping("/perform_logout")
+    public String logoutPage(Model model) {
+        model.addAttribute("logged", true);
+        return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logout(Authentication authentication) { authentication.setAuthenticated(false);
+        return "logout";
     }
 
 

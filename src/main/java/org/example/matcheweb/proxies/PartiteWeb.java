@@ -2,9 +2,13 @@ package org.example.matcheweb.proxies;
 
 
 import org.example.matcheweb.configurations.OpenFeignConfig;
+import org.example.matcheweb.pojos.Partita;
+import org.example.matcheweb.pojos.Squadra;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -12,8 +16,25 @@ import java.util.List;
 @FeignClient(name = "PartiteWeb",
         url = "${name.service.url}",
         configuration = OpenFeignConfig.class)
-public interface PartiteWeb<Squadra> {
-
+public interface PartiteWeb {
+    @PostMapping("/listaPartite")
+    public List<Partita> getMatches(@RequestParam String sport, @RequestParam String giorno);
     @GetMapping("/listaSquadre")
     public ResponseEntity<List<Squadra>> getSquadreBySport(@RequestParam String sport);
+
+    @PostMapping("/CalendarioPartite")
+    public  List<Partita> getAllMatches(@RequestParam String sport);
+
+    @PostMapping("/getTeams")
+    public  List<Partita> getTeams(@RequestParam String sport);
+
+    // @PostMapping("/createMatches")
+    // public  void createMatches(@RequestBody String sport);
+
+    @PostMapping("/prendiRisultati")
+    public  List<Integer> getResults(@RequestParam String sport,
+                                     @RequestParam String giorno,
+                                     @RequestParam List<Integer> predictions);
+
+
 }

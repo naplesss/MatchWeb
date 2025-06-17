@@ -2,6 +2,7 @@ package org.example.matcheweb.controllers;
 
 import org.example.matcheweb.pojos.Recensione;
 import org.example.matcheweb.pojos.User;
+import org.example.matcheweb.proxies.PartiteWeb;
 import org.example.matcheweb.repositories.UserRepository;
 import org.example.matcheweb.repositories.recensioneRepository;
 import org.springframework.security.core.Authentication;
@@ -12,16 +13,19 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 @Controller
 public class MainController {
     private final UserRepository userRepository;
     private final recensioneRepository recensioneRepository;
+    private final PartiteWeb partiteWeb;
 
-    MainController(UserRepository userRepository, recensioneRepository recensioneRepository) {
+    MainController(UserRepository userRepository, recensioneRepository recensioneRepository, PartiteWeb partiteWeb) {
         this.userRepository = userRepository;
         this.recensioneRepository = recensioneRepository;
+        this.partiteWeb = partiteWeb;
     }
 
     //home page
@@ -175,23 +179,35 @@ public class MainController {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         if (user != null) {
-            Recensione recensione = new Recensione();
-            recensione.setUserId(user.getId());
-            recensione.setVoto(voto);
-            recensione.setCommento(commento);
-            recensioneRepository.addRecensione(recensione);
+            recensioneRepository.addRecensione(new Recensione(user.getId(),voto, commento));
         }
         return "redirect:/recensioneuser";
     }
     @GetMapping("/Listarecensioni")
-    public String getRecensioni(Authentication authentication, Model model) {
-        String id = authentication.getName();
-        if (id != null) {
-            model.addAttribute("id",id);
-            model.addAttribute("recensioni",recensioneRepository.findAllRecensioni());
-            return ("RecensioniGlobale");}
-        else
-            return ("RecensioniGlobale");
+    public String getRecensioni(Model model) {
+        model.addAttribute("recensioni",recensioneRepository.findAllRecensioni());
+        return ("RecensioniGlobale");
+    }
+
+    @PostMapping("/cambioPassword")
+    public String cambioPassword(Authentication authentication,@RequestParam String passwordV,@RequestParam String passwordN,
+                                 Model model) {
+        boolean result = userRepository.cambiaPassword(authentication.getName(), passwordN, passwordV);
+        model.addAttribute("passwordChanged", result);
+        model.addAttribute("wrongPassword", !result);
+        return "CambioPassword";
+    }
+
+    @GetMapping("/pagcambiopw")
+    public String cambioPassword() {
+        return ("CambioPassword");
+    }
+
+    @GetMapping("/calendario")
+    public String calendario(Authentication authentication, Model model) {
+        String sport = userRepository.FindSport(authentication.getName());
+        model.addAttribute("partite",partiteWeb.getMatches(sport, LocalDate.now().toString()));
+        return ("VisualizzaCalendario");
     }
 
 

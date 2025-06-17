@@ -45,11 +45,13 @@ public class SecurityConfig {
         http.authorizeHttpRequests(c ->
                 c.requestMatchers("/dashboard").hasAnyRole("ADMIN", "USER", "MODERATOR")
                         .requestMatchers("/dashboardUser").hasAnyRole( "USER", "MODERATOR")
-                        .requestMatchers("/compute").hasAnyRole("USER","MODERATOR")
-                        .requestMatchers("/datetime").hasAnyRole("USER","MODERATOR")
-                        .requestMatchers("/externalDateTime").hasAnyRole( "USER","MODERATOR")
+                        .requestMatchers("/recensioneuser").hasAnyRole("USER","MODERATOR")
+                        .requestMatchers("/recensione").hasAnyRole("USER","MODERATOR")
+                        .requestMatchers("/cambioPassword").hasAnyRole( "USER","MODERATOR")
+                        .requestMatchers("/calendario").hasAnyRole("USER","MODERATOR")
                         .requestMatchers("/dashboardAdmin").hasRole("ADMIN")
-                        .requestMatchers("/getUsers").hasRole("ADMIN")
+                        .requestMatchers("/ListaUtenti").hasRole("ADMIN")
+                        .requestMatchers("/ClassificaUtenti").hasRole("ADMIN")
                         .anyRequest().permitAll()
         );
 

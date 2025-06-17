@@ -13,8 +13,7 @@ public Recensione (){
     this.COMMENTO="";
 
 }
-public Recensione (int ID, int USER_ID, int VOTO, String COMMENTO){
-    this.ID=ID;
+public Recensione ( int USER_ID, int VOTO, String COMMENTO){
     this.USER_ID=USER_ID;
     this.VOTO=VOTO;
     this.COMMENTO=COMMENTO;
@@ -25,8 +24,8 @@ public Recensione (int ID, int USER_ID, int VOTO, String COMMENTO){
     public String getCOMMENTO() {return COMMENTO;}
     public void setID(int ID) {this.ID = ID;}
     public void setUSER_ID(int USER_ID){this.USER_ID= USER_ID;}
-    public void setVOTO(int VOTO){this.VOTO= this.VOTO;}
-    public void setCOMMENTO(String COMMENTO){this.COMMENTO= this.COMMENTO;}
+    public void setVOTO(int VOTO){this.VOTO= VOTO;}
+    public void setCOMMENTO(String COMMENTO){this.COMMENTO= COMMENTO;}
 
 
 }

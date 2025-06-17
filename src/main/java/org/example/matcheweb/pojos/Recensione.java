@@ -13,8 +13,7 @@ public Recensione (){
     this.COMMENTO="";
 
 }
-public Recensione (int ID, int USER_ID, int VOTO, String COMMENTO){
-    this.ID=ID;
+public Recensione ( int USER_ID, int VOTO, String COMMENTO){
     this.USER_ID=USER_ID;
     this.VOTO=VOTO;
     this.COMMENTO=COMMENTO;

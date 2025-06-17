@@ -37,8 +37,8 @@ import java.util.List;
                 RowMapper<User> userRowMapper = (r, i) -> {
                     User rowObject = new User();
                     rowObject.setUsername(r.getString("USERNAME"));
-                    rowObject.setNome(r.getString("FIRSTNAME"));
-                    rowObject.setCognome(r.getString("LASTNAME"));
+                    rowObject.setNome(r.getString("NOME"));
+                    rowObject.setCognome(r.getString("COGNOME"));
                     rowObject.setEmail(r.getString("EMAIL"));
                     rowObject.setRole(r.getString("AUTHORITY"));
                     return rowObject;
@@ -61,7 +61,7 @@ import java.util.List;
                 userDetailsManager.createUser(new SecurityUser(user));
             }
             public List<User> getClassificaUtenti (){
-            String sql = "SELECT username,SUM (punti) AS points FROM (SELECT username,punti FROM PUNTI JOIN USERDATA ON PUNTI.ID=USERDATA.ID ORDER BY punti DESC) AS subquery GROUP BY username";
+            String sql = "SELECT username,SUM (punti) AS points FROM (SELECT username, GIORNATE.punti FROM GIORNATE JOIN USERDATA ON GIORNATE.ID=USERDATA.ID ORDER BY punti DESC) AS subquery GROUP BY username";
             RowMapper<User> rankingRowMapper = (r,i)->{
                 User user = new User();
                 user.setUsername(r.getString("usernsme"));
@@ -89,10 +89,29 @@ import java.util.List;
                 user.setNome(r.getString("nome"));
                 user.setCognome(r.getString("cognome"));
                 user.setEmail(r.getString("email"));
-                user.setPunti(r.getInt("punti"));
-                user.setClassifica(r.getInt("classifica"));
                 return user;
             };
+
             return jdbc.queryForObject(sql,userRowMapper,username);
+        }
+
+        public boolean cambiaPassword(String username, String nuova, String vecchia) {
+            String sql = "SELECT password FROM users WHERE username = ?";
+            RowMapper<String> passwordRowMapper = (r, i) -> r.getString("password");
+            String attuale = jdbc.queryForObject(sql, passwordRowMapper, username);
+            boolean result = passwordEncoder.matches(vecchia, attuale);
+            if (result) {
+                userDetailsManager.changePassword(passwordEncoder.encode(vecchia), passwordEncoder.encode(nuova));
+            }
+            return result;
+        }
+
+        public String FindSport(String username){
+            String sql = "SELECT SPORT FROM USERDATA WHERE USERNAME = ?";
+            RowMapper<String> FindSport = (r,i)->{
+                String sport = r.getString("sport");
+                return sport;
+            };
+            return jdbc.queryForObject(sql,FindSport,username);
         }
     }

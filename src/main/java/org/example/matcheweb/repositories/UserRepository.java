@@ -37,8 +37,8 @@ import java.util.List;
                 RowMapper<User> userRowMapper = (r, i) -> {
                     User rowObject = new User();
                     rowObject.setUsername(r.getString("USERNAME"));
-                    rowObject.setFirstName(r.getString("FIRSTNAME"));
-                    rowObject.setLastName(r.getString("LASTNAME"));
+                    rowObject.setNome(r.getString("FIRSTNAME"));
+                    rowObject.setCognome(r.getString("LASTNAME"));
                     rowObject.setEmail(r.getString("EMAIL"));
                     rowObject.setRole(r.getString("AUTHORITY"));
                     return rowObject;

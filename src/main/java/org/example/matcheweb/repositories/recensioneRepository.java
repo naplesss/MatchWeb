@@ -16,15 +16,16 @@ public class recensioneRepository {
         this.jdbc = jdbc;
     }
 
-    public void addRecensione(int userId, int voto, String commento) {
+    public void addRecensione(Recensione recensione) {
         String sql = "INSERT INTO RECENSIONI (USER_ID, voto, commento) VALUES (?, ?, ?)";
-        jdbc.update(sql, userId, voto, commento);
+        jdbc.update(sql, recensione.getUserId(),recensione.getVoto(),recensione.getCommento());
     }
     public List<Recensione> findAllRecensioni(int userId){
         String sql = "SELECT * FROM RECENSIONI WHERE USER_ID = ?";
         RowMapper<Recensione> RecensioneRowMapper = (r,i)->{
             Recensione RowObject = new Recensione();
             RowObject.setId(r.getInt("id"));
+
             RowObject.setUserId(r.getInt("user_id"));
             RowObject.setVoto(r.getInt("voto"));
             RowObject.setCommento(r.getString("commento"));

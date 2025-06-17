@@ -174,9 +174,9 @@ public class MainController {
         if (id != null) {
             model.addAttribute("id",id);
             model.addAttribute("recensioni",recensioneRepository.findAllRecensioni());
-            return ("recensioni");}
+            return ("RecensioniGlobale");}
         else
-            return ("recensioni");
+            return ("RecensioniGlobale");
     }
 
 

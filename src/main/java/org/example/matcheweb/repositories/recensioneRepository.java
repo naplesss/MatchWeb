@@ -24,10 +24,10 @@ public class recensioneRepository {
         String sql = "SELECT * FROM RECENSIONI ";
         RowMapper<Recensione> RecensioneRowMapper = (r,i)->{
             Recensione RowObject = new Recensione();
-            RowObject.setId(r.getInt("id"));
-            RowObject.setUserId(r.getInt("user_id"));
-            RowObject.setVoto(r.getInt("voto"));
-            RowObject.setCommento(r.getString("commento"));
+            RowObject.setID(r.getInt("ID"));
+            RowObject.setUSER_ID(r.getInt("USER_ID"));
+            RowObject.setVOTO(r.getInt("VOTO"));
+            RowObject.setCOMMENTO(r.getString("COMMENTO"));
             return RowObject;
         };
         return jdbc.query(sql,RecensioneRowMapper);

@@ -1,32 +1,32 @@
 package org.example.matcheweb.pojos;
 
 public class Recensione {
-    private int id;
-    private int userId;
-    private int voto;
-    private String commento;
+    private int ID;
+    private int USER_ID;
+    private int VOTO;
+    private String COMMENTO;
 
 public Recensione (){
-    this.id=0;
-    this.userId=0;
-    this.voto=0;
-    this.commento="";
+    this.ID=0;
+    this.USER_ID=0;
+    this.VOTO=0;
+    this.COMMENTO="";
 
 }
-public Recensione (int id, int userId, int voto, String commento){
-    this.id=id;
-    this.userId=userId;
-    this.voto=voto;
-    this.commento=commento;
+public Recensione (int ID, int USER_ID, int VOTO, String COMMENTO){
+    this.ID=ID;
+    this.USER_ID=USER_ID;
+    this.VOTO=VOTO;
+    this.COMMENTO=COMMENTO;
 }
-    public int getId() {return id;}
-    public int getUserId() {return userId;}
-    public int getVoto() {return voto;}
-    public String getCommento() {return commento;}
-    public void setId(int id) {this.id = id;}
-    public void setUserId(int userId){this.userId=userId;}
-    public void setVoto(int voto){this.voto=voto;}
-    public void setCommento(String commento){this.commento=commento;}
+    public int getID() {return ID;}
+    public int getUSER_ID() {return USER_ID;}
+    public int getVOTO() {return VOTO;}
+    public String getCOMMENTO() {return COMMENTO;}
+    public void setID(int ID) {this.ID = ID;}
+    public void setUSER_ID(int USER_ID){this.USER_ID= USER_ID;}
+    public void setVOTO(int VOTO){this.VOTO= this.VOTO;}
+    public void setCOMMENTO(String COMMENTO){this.COMMENTO= this.COMMENTO;}
 
 
 }

@@ -22,10 +22,10 @@
             <th>COMMENTO</th>
         </tr>
         <tr th:each="recensione : ${recensioni}">
-            <td th:text="${recensione.id}"></td>
-            <td th:text="${recensione.userId}"></td>
-            <td th:text="${recensione.voto}"></td>
-            <td th:text="${recensione.commento}"></td>
+            <td th:text="${recensione.ID}"></td>
+            <td th:text="${recensione.USER_ID}"></td>
+            <td th:text="${recensione.VOTO}"></td>
+            <td th:text="${recensione.COMMENTO}"></td>
         </tr>
     </table>
 </div>

@@ -25,8 +25,11 @@
                    title="deve contenere almeno un carattere speciale, due numeri e deve essere di una lunghezza minima di 9 caratteri"
                    onkeyup="checkPassword()" onfocus="mostraMessaggio('messaggio')" onblur="nascondiMessaggio('messaggio')"required>
         </div>
+<!--        bottone mostra password-->
+        <button type="button" onclick="mostraPassword('password')" >cliccami ;P</button><br><br>
         <div th:if="${erroreNome}" class="alert alert-danger" th:text="${erroreNome}"></div>
         <br>
+<!--        messaggio di specifica password-->
         <div id="messaggio" style="display: none">
             <h3>La password deve contenere:</h3>
             <p id="speciali" class="invalid">1 carattere <b>speciale</b> </p>

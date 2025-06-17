@@ -80,4 +80,20 @@ import java.util.List;
 
             }
 
+
+        public User findByUsername(String username) {
+            String sql = "SELECT * FROM USERDATA WHERE USERNAME = ?";
+            RowMapper<User> userRowMapper = (r,i)->{
+                User user = new User();
+                user.setId(r.getInt("id"));
+                user.setUsername(r.getString("username"));
+                user.setNome(r.getString("nome"));
+                user.setCognome(r.getString("cognome"));
+                user.setEmail(r.getString("email"));
+                user.setPunti(r.getInt("punti"));
+                user.setClassifica(r.getInt("classifica"));
+                return user;
+            };
+            return jdbc.queryForObject(sql,userRowMapper,username);
+        }
     }

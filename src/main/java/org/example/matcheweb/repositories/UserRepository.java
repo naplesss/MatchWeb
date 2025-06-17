@@ -37,12 +37,15 @@ import java.util.List;
                 RowMapper<User> userRowMapper = (r, i) -> {
                     User rowObject = new User();
                     rowObject.setUsername(r.getString("USERNAME"));
+                    rowObject.setFirstName(r.getString("FIRSTNAME"));
+                    rowObject.setLastName(r.getString("LASTNAME"));
                     rowObject.setEmail(r.getString("EMAIL"));
                     rowObject.setRole(r.getString("AUTHORITY"));
                     return rowObject;
                 };
                 return jdbc.query(sql, userRowMapper);
             }
+            public List<>
 
             public void addUser (User user){
                 String sql = "INSERT INTO USERDATA VALUES (DEFAULT, ?, ?, ?, ?,?, ?, ?)";

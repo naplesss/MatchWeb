@@ -17,9 +17,14 @@ public class recensioneRepository {
     }
 
     public void addRecensione(Recensione recensione) {
-        String sql = "INSERT INTO RECENSIONI (USER_ID, voto, commento) VALUES (?, ?, ?)";
-        jdbc.update(sql, recensione.getUserId(),recensione.getVoto(),recensione.getCommento());
+        String sql = "INSERT INTO RECENSIONI VALUES (DEFAULT,?, ?, ?)";
+        jdbc.update(sql,
+                recensione.getUserId(),
+                recensione.getVoto(),
+                recensione.getCommento()
+                );
     }
+
     public List<Recensione> findAllRecensioni(){
         String sql = "SELECT * FROM RECENSIONI ";
         RowMapper<Recensione> RecensioneRowMapper = (r,i)->{

@@ -102,16 +102,4 @@ function mostraMessaggio(id){
     document.getElementById(id).style.display = "block";
 }
 
-// function setTeamSelection(sport) {
-//     let dataList = document.getElementById("sportcuore");
-//     dataList.innerHTML = "";
-//     let teamList = JSON.parse(document.getElementById("sportcuore").getAttribute("data-team-list"));
-//     teamList.forEach(element => {
-//         if (element.sport === sport) {
-//             const option = document.createElement("option");
-//             option.value = element.nomesquadra;
-//             option.textContent = element.nomesquadra;
-//             dataList.appendChild(option);
-//         }
-//     });
-// }
+

@@ -2,11 +2,13 @@ package org.example.matcheweb.controllers;
 
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -35,4 +37,21 @@ public class AdminController {
         model.addAttribute("ListaUtenti", userRepository.getClassificaUtenti());
         return "segments/adminActions/ListaUtenti";
     }
+    @GetMapping("/upgradeUser")
+    public String upgradeUser(Model model) {
+        model.addAttribute("userList", userRepository.getUsersOnly());
+        return "segments/adminActions/promote";
+    }
+
+    // actual promotion of a user to admin
+    // reloads the user list after promotion
+    @PostMapping("/promote")
+    public String promote(@RequestBody Map<String, Object> payload, Model model) {
+        int userId = (int) payload.get("userId");
+        userRepository.promoteUser(userId);
+        model.addAttribute("userList", userRepository.getUsersOnly());
+        return "segments/adminActions/promote";
+    }
+
+
 }

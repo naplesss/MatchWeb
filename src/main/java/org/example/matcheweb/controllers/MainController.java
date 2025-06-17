@@ -176,9 +176,9 @@ public class MainController {
         User user = userRepository.findByUsername(username);
         if (user != null) {
             Recensione recensione = new Recensione();
-            recensione.setUserId(user.getId());
-            recensione.setVoto(voto);
-            recensione.setCommento(commento);
+            recensione.setUSER_ID(user.getID());
+            recensione.setVOTO(VOTO);
+            recensione.setCOMMENTO(COMMENTO);
             recensioneRepository.addRecensione(recensione);
         }
         return "redirect:/recensioneuser";

@@ -10,7 +10,7 @@
 <body>
 <div th:replace="~{BarraDiNavigazione.html}"></div>
 <div th:replace="~{News.html}"></div>"
-<form th:action="@{/ListaRecensioni}" method="get">
+<form th:action="@{/Listarecensioni}" method="get">
     <button type="submit" style="background-color: darkred;padding: 10px 20px;font-size: 16px; cursor:pointer;color: white;">Get the list of users</button>
 </form>
 <div th:if="${ not#lists.isEmpty(recensioni)}">

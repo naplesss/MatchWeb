@@ -1,5 +1,6 @@
 package org.example.matcheweb.controllers;
 
+import org.example.matcheweb.pojos.Recensione;
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.repositories.UserRepository;
 import org.example.matcheweb.repositories.recensioneRepository;
@@ -158,13 +159,27 @@ public class MainController {
         return "logout";
     }
 
-    @PostMapping ("/recensione")
+//    @PostMapping ("/recensione")
+//    public String addRecensione(@RequestParam int voto, @RequestParam String commento, Authentication authentication) {
+//        String username = authentication.getName();
+//        User user = userRepository.findByUsername(username);
+//        if (user != null) {
+//
+//            recensioneRepository.addRecensione(user.getId(), voto, commento);
+//        }
+//        return "redirect:/recensioneuser";
+//    }
+
+    @PostMapping("/recensione")
     public String addRecensione(@RequestParam int voto, @RequestParam String commento, Authentication authentication) {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         if (user != null) {
-
-            recensioneRepository.addRecensione(user.getId(), voto, commento);
+            Recensione recensione = new Recensione();
+            recensione.setUserId(user.getId());
+            recensione.setVoto(voto);
+            recensione.setCommento(commento);
+            recensioneRepository.addRecensione(recensione);
         }
         return "redirect:/recensioneuser";
     }

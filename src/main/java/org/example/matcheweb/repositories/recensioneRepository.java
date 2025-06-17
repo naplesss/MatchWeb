@@ -20,8 +20,8 @@ public class recensioneRepository {
         String sql = "INSERT INTO RECENSIONI (USER_ID, voto, commento) VALUES (?, ?, ?)";
         jdbc.update(sql, userId, voto, commento);
     }
-    public List<Recensione> findAllRecensioni(int userId){
-        String sql = "SELECT * FROM RECENSIONI WHERE USER_ID = ?";
+    public List<Recensione> findAllRecensioni(){
+        String sql = "SELECT * FROM RECENSIONI ";
         RowMapper<Recensione> RecensioneRowMapper = (r,i)->{
             Recensione RowObject = new Recensione();
             RowObject.setId(r.getInt("id"));
@@ -30,6 +30,6 @@ public class recensioneRepository {
             RowObject.setCommento(r.getString("commento"));
             return RowObject;
         };
-        return jdbc.query(sql,RecensioneRowMapper,userId);
+        return jdbc.query(sql,RecensioneRowMapper);
     }
 }

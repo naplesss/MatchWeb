@@ -109,16 +109,16 @@ public class MainController {
         return "login";
     }
 //roba di gaia per admin dashbpard
-    @GetMapping("/ListaUtentiIscritti")
-    public String getUsers(Authentication authentication, Model model) {
-        String name = authentication.getName();
-        if (name != null) {
-            model.addAttribute("name",name);
-            model.addAttribute("users", userRepository.findAllUsers());
-            return ("ListaUtentiIscritti");}
-        else
-            return ("index");
-    }
+//    @GetMapping("/ListaUtentiIscritti")
+//    public String getUsers(Authentication authentication, Model model) {
+//        String name = authentication.getName();
+//        if (name != null) {
+//            model.addAttribute("name",name);
+//            model.addAttribute("users", userRepository.findAllUsers());
+//            return ("ListaUtentiIscritti");}
+//        else
+//            return ("index");
+//    }
     @GetMapping("/News")
     public String getNews(){
         return ("News");

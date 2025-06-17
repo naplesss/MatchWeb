@@ -13,7 +13,7 @@ public class recensioneRepository {
     }
 
     public void addRecensione(int userId, int voto, String commento) {
-        String sql = "INSERT INTO RECENSIONI (USER_ID, VOTO, COMMENTO) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO RECENSIONI (USER_ID, voto, commento) VALUES (?, ?, ?)";
         jdbc.update(sql, userId, voto, commento);
     }
 }

@@ -226,20 +226,26 @@ public class MainController {
     @GetMapping("/schedina")
     public String schedina(Model model) {
         List<Partita> partite = partiteWeb.getMatches("lacrosse", LocalDate.now().toString());
-        model.addAttribute("partita1", partite.get(0));
-        model.addAttribute("partita2", partite.get(1));
+
+        Partita defaultPartita = new Partita();
+        defaultPartita.setId_squadracasa("N/D");
+        defaultPartita.setId_squadrafuori("N/D");
+
+        // Usa le partite reali se esistono, altrimenti quelle di default
+        model.addAttribute("partita1", partite != null && !partite.isEmpty() ? partite.get(0) : defaultPartita);
+        model.addAttribute("partita2", partite != null && partite.size() > 1 ? partite.get(1) : defaultPartita);
 
         return("Schedina");}
 
 
     @PostMapping("/scommesse")
-    public ResponseEntity<String> post(@RequestParam int pronostico1, @RequestParam int pronostico2, Model model) {
+    public ResponseEntity<List<Integer>> post(@RequestParam int pronostico1, @RequestParam int pronostico2, Model model) {
         List<Integer> pronostici = new ArrayList<>();
         pronostici.add(pronostico1);
         pronostici.add(pronostico2);
         List<Integer> risultati = partiteWeb.getResults("lacrosse", LocalDate.now().toString(),pronostici);
         model.addAttribute("risultati", risultati);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(risultati);
     }
 
 

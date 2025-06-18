@@ -133,29 +133,30 @@ function mostraSquadre(){
 
 function inviamo(){
     var righe = document.getElementsByTagName("tr");
-    fetch("/Scomemesse", {
+    fetch("/scommesse", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: `pronostico1=${encodeURIComponent(document.getElementById("pronostico1").value)}&pronostico2=${encodeURIComponent(document.getElementById("pronostico2").value)}`
     }).then(function (response) {
-        if (response.status !== 200) {
+        if (!response.ok) {
             throw new Error("ERRORE CARICAMENTO PARTITE");
 
         }
         return response.json();
 
-    }).then(function (json) {
-        var c=1;
-        json.forEach(partita => {
-            var risultato = document.createElement('td');
-            risultato.innerHTML=partita;
-            righe[c].appendChild(risultato);
-            c++;
-        });
+    }).then(function (risultati) {
+        var risultRig = document.createElement('tr');
+        var risultCol = document.createElement('td');
+        risultCol.colSpan = 3;
+        risultCol.textContent = "Risultati"+ risultati.join("-");
+        risultRig.appendChild(risultCol);
+
+        document.querySelector('form').after(risultRig);
     }).catch(error => {
         console.error(error);
+        alert("SI è VERIFICATTO UN ERRORE: "+ error.message);
     });
 }
 

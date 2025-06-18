@@ -19,8 +19,9 @@
         </tr>
         <tbody>
         <tr>
-        <td th:text="${partita1.id_squadracasa}"></td>
-        <td th:text="${partita1.id_squadrafuori}"></td>
+            <td th:text="${partita1.id_squadracasa} ?: 'Nessuna partita'"></td>
+            <td th:text="${partita1.id_squadrafuori} ?: 'Nessuna partita'"></td>
+            >
         <td><select id="pronostico1" name="pronostico1">
             <option value="0">0</option>
             <option value="1">1</option>
@@ -28,8 +29,8 @@
         </select></td>
         </tr>
         <tr>
-            <td th:text="${partita2.id_squadracasa}"></td>
-            <td th:text="${partita2.id_squadrafuori}"></td>
+            <td th:text="${partita2.id_squadracasa} ?: 'Nessuna partita' "></td>
+            <td th:text="${partita2.id_squadrafuori} ?: 'Nessuna partita' "></td>
             <td><select id="pronostico2" name="pronostico2">
                 <option value="0">0</option>
                 <option value="1">1</option>

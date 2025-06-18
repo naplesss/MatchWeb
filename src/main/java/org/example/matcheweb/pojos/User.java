@@ -15,7 +15,7 @@ public class User {
     private Date birthdate;
     private String sport;
     private String squadra;
-    private int points;
+    private int punti;
     private int rank;
     public User() {
         this.id = 0;
@@ -28,7 +28,7 @@ public class User {
         this.birthdate = null;
         this.sport = "";
         this.squadra = "";
-        this.points = 0;
+        this.punti = 0;
         this.rank = 0;
     }
 
@@ -43,7 +43,7 @@ public class User {
         this.birthdate = birthdate;
         this.sport = sport;
         this.squadra = squadra;
-        this.points = 0;
+        this.punti = 0;
         this.rank = 0;
     }
 
@@ -57,7 +57,7 @@ public class User {
     public Date getBirthdate() {return birthdate;}
     public String getsport() {return sport;}
     public String getsquadra() {return squadra;}
-    public int getPunti() {return points;}
+    public int getPunti() {return punti;}
     public int getClassifica() {return rank;}
 
     public void setId(int id) {this.id = id;}
@@ -70,6 +70,6 @@ public class User {
     public void setBirthdate(Date birthdate) {this.birthdate = birthdate;}
     public void setSport(String sport) {this.sport = sport;}
     public void setSquadra(String squadra) {this.squadra = squadra;}
-    public void setPunti(int points) {this.points = points;}
+    public void setPunti(int points) {this.punti = points;}
     public void setClassifica(int rank) {this.rank = rank;}
 }

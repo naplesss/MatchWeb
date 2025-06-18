@@ -204,9 +204,10 @@ public class MainController {
     @GetMapping("/calendario")
     public String calendario(Authentication authentication, Model model) {
         String sport = userRepository.FindSport(authentication.getName());
-        model.addAttribute("partite",partiteWeb.getMatches(sport, LocalDate.now().toString()));
+        model.addAttribute("partite",partiteWeb.getAllMatches(sport));
         return ("VisualizzaCalendario");
     }
+
 
     //restituisce i team
     @PostMapping("/getTeams")

@@ -65,7 +65,7 @@ public class MainController {
         return "polo";
     }
 
-    //fune
+    //tiro alla fune
     @GetMapping("/fune")
     public String fune() {return "fune";}
 
@@ -73,7 +73,7 @@ public class MainController {
     @GetMapping("/lacrosse")
     public String lacrosse() {return "lacrosse";}
 
-    //sponsor
+    //pagina sponsor
     @GetMapping("/sponsor")
     public String sponsor() {return "sponsor";}
 
@@ -84,6 +84,7 @@ public class MainController {
     @GetMapping("/recensioniglobale")
     public String recensioniGlobale() {return "RecensioniGlobale";}
 
+    //per registraree un nuovo utente
     @PostMapping("/addUser")
     public String addUser(@RequestParam String firstName,
                           @RequestParam String lastName,
@@ -111,7 +112,7 @@ public class MainController {
         }
         return returnPage;
     }
-
+    //errori di login
     @PostMapping("/loginFailure")
     public String loginFallito(Model model) {
 
@@ -119,34 +120,28 @@ public class MainController {
 
         return "login";
     }
-//roba di gaia per admin dashbpard
-//    @GetMapping("/ListaUtentiIscritti")
-//    public String getUsers(Authentication authentication, Model model) {
-//        String name = authentication.getName();
-//        if (name != null) {
-//            model.addAttribute("name",name);
-//            model.addAttribute("users", userRepository.findAllUsers());
-//            return ("ListaUtentiIscritti");}
-//        else
-//            return ("index");
-//    }
+
+    //pagina news
     @GetMapping("/News")
     public String getNews(){
         return ("News");
     }
 
+    //dashboard user
     @GetMapping("/dashboardUser")
     public String userDashboard(Authentication authentication, Model model) {
         model.addAttribute("name", authentication.getName());
         return "DashboardUser";
     }
 
+    //dashboard admin
     @GetMapping("/dashboardAdmin")
     public String adminDashboard(Authentication authentication, Model model) {
         model.addAttribute("name", authentication.getName());
         return "DashboardAdmin";
     }
 
+    //dashboard pe indirizzare in base al ruolo
     @GetMapping("/dashboard")
     public String dashboard(Authentication authentication) {
         String returnPage;
@@ -158,28 +153,20 @@ public class MainController {
         return returnPage;
     }
 
+    //per il logout
     @GetMapping("/perform_logout")
     public String logoutPage(Model model) {
         model.addAttribute("logged", true);
         return "index";
     }
 
+    //per la pagina di logout
     @GetMapping("/logout")
     public String logout(Authentication authentication) { authentication.setAuthenticated(false);
         return "logout";
     }
 
-//    @PostMapping ("/recensione")
-//    public String addRecensione(@RequestParam int voto, @RequestParam String commento, Authentication authentication) {
-//        String username = authentication.getName();
-//        User user = userRepository.findByUsername(username);
-//        if (user != null) {
-//
-//            recensioneRepository.addRecensione(user.getId(), voto, commento);
-//        }
-//        return "redirect:/recensioneuser";
-//    }
-
+    //per scrivere una recensione
     @PostMapping("/recensione")
     public String addRecensione(@RequestParam int voto, @RequestParam String commento, Authentication authentication) {
         String username = authentication.getName();
@@ -189,12 +176,15 @@ public class MainController {
         }
         return "redirect:/recensioneuser";
     }
+
+    //lista delle recensioni
     @GetMapping("/Listarecensioni")
     public String getRecensioni(Model model) {
         model.addAttribute("recensioni",recensioneRepository.findAllRecensioni());
         return ("RecensioniGlobale");
     }
 
+    //cambiare la password
     @PostMapping("/cambioPassword")
     public String cambioPassword(Authentication authentication,@RequestParam String passwordV,@RequestParam String passwordN,
                                  Model model) {
@@ -204,11 +194,13 @@ public class MainController {
         return "CambioPassword";
     }
 
+    //pagina cambio password
     @GetMapping("/pagcambiopw")
     public String cambioPassword() {
         return ("CambioPassword");
     }
 
+    //pagina calendario
     @GetMapping("/calendario")
     public String calendario(Authentication authentication, Model model) {
         String sport = userRepository.FindSport(authentication.getName());
@@ -216,6 +208,7 @@ public class MainController {
         return ("VisualizzaCalendario");
     }
 
+    //restituisce i team
     @PostMapping("/getTeams")
     @ResponseBody
     public List<Squadra> post(@RequestBody Map<String, String> data) {
@@ -223,10 +216,12 @@ public class MainController {
         return partiteWeb.getTeams(sport);
     }
 
+    //pagina per giocare la schedina
     @GetMapping("/schedina")
     public String schedina(Model model) {
         List<Partita> partite = partiteWeb.getMatches("lacrosse", LocalDate.now().toString());
 
+        //per gestire i null
         Partita defaultPartita = new Partita();
         defaultPartita.setId_squadracasa("N/D");
         defaultPartita.setId_squadrafuori("N/D");
@@ -237,7 +232,7 @@ public class MainController {
 
         return("Schedina");}
 
-
+    //risultati delle scommesse
     @PostMapping("/scommesse")
     public ResponseEntity<List<Integer>> post(@RequestParam int pronostico1, @RequestParam int pronostico2, Model model) {
         List<Integer> pronostici = new ArrayList<>();

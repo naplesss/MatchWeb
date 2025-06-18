@@ -38,7 +38,7 @@ public class SecurityConfig {
         http.formLogin(c ->
                 c.loginPage("/login")
                         .defaultSuccessUrl("/dashboard")
-                        .failureForwardUrl("/loginFailure") //Pay attention it is a forward! So, in the Controller you should use @PostMapping
+                        .failureForwardUrl("/loginFailure")
         );
 
         // Authorization
@@ -58,12 +58,11 @@ public class SecurityConfig {
 
         // Logout
         http.logout(c ->
-                c.logoutUrl("/perform_logout") // It is the Spring Security logout endpoint
-                        .logoutSuccessUrl("/index") //Pay attention it is using a GET-redirect under the hood! So, in the Controller you should use @GetMapping
-
+                c.logoutUrl("/perform_logout")
+                        .logoutSuccessUrl("/index")
         );
 
-        // TO DISABLE CSRF PROTECTION
+
         http.csrf(AbstractHttpConfigurer::disable);
 
         return http.build();

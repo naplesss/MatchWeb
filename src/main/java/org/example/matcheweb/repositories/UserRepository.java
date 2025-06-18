@@ -30,7 +30,7 @@ import java.util.List;
             public boolean userExists (String username){
                 return userDetailsManager.userExists(username);
             }
-
+            //restituisce una lista di utenti ordinati alfabeticamente
             public List<User> findAllUsers () {
                 String sql = "SELECT * FROM USERDATA JOIN AUTHORITIES ON USERDATA.ID=AUTHORITIES.ID ORDER BY Username";
 
@@ -45,7 +45,7 @@ import java.util.List;
                 };
                 return jdbc.query(sql, userRowMapper);
             }
-
+            //aggiunge un utente al database
             public void addUser (User user){
                 String sql = "INSERT INTO USERDATA VALUES (DEFAULT, ?, ?, ?, ?,?, ?, ?)";
                 jdbc.update(sql,
@@ -60,6 +60,7 @@ import java.util.List;
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userDetailsManager.createUser(new SecurityUser(user));
             }
+            //restituisce la classifica degli utenti
             public List<User> getClassificaUtenti (){
             String sql = "SELECT username,SUM (punti) AS tot_punti FROM (SELECT username, GIORNATE.punti FROM GIORNATE JOIN USERDATA ON GIORNATE.ID=USERDATA.ID ORDER BY punti DESC) AS subquery GROUP BY username";
             RowMapper<User> rankingRowMapper = (r,i)->{
@@ -71,7 +72,7 @@ import java.util.List;
                 };
             return jdbc.query(sql,rankingRowMapper);
             }
-
+            //per controllare che l'utente sia maggiorenne
             public boolean isMaggiorenne(Date birthdate){
                int compleanno = birthdate.toLocalDate().getYear();
                 int annoCorrente = LocalDate.now().getYear();
@@ -79,7 +80,7 @@ import java.util.List;
 
             }
 
-
+        //trova un utente dal suo username
         public User findByUsername(String username) {
             String sql = "SELECT * FROM USERDATA WHERE USERNAME = ?";
             RowMapper<User> userRowMapper = (r,i)->{
@@ -114,7 +115,7 @@ import java.util.List;
 
             return jdbc.queryForObject(sql,userRowMapper,username);
         }
-
+        //cambia la password di un utente
         public boolean cambiaPassword(String username, String nuova, String vecchia) {
             String sql = "SELECT password FROM users WHERE username = ?";
             RowMapper<String> passwordRowMapper = (r, i) -> r.getString("password");
@@ -125,7 +126,7 @@ import java.util.List;
             }
             return result;
         }
-
+        //restituisce lo sport
         public String FindSport(String username){
             String sql = "SELECT SPORT FROM USERDATA WHERE USERNAME = ?";
             RowMapper<String> FindSport = (r,i)->{
@@ -133,7 +134,7 @@ import java.util.List;
                 return sport;
             };
             return jdbc.queryForObject(sql,FindSport,username);
-            public String Teams();
+//            public String Teams();
         }
 
     }

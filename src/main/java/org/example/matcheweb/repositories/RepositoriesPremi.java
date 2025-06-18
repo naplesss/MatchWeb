@@ -10,7 +10,7 @@ public class RepositoriesPremi {
     public RepositoriesPremi(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
-
+    //aggiunge un premio ad un user
     public void addPremi(String username,String premio) {
         String sql = "INSERT INTO PREMI VALUES (DEFAULT,?,?)";
         jdbc.update(sql, username,premio);

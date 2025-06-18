@@ -102,4 +102,63 @@ function mostraMessaggio(id){
     document.getElementById(id).style.display = "block";
 }
 
+function mostraSquadre(){
+    var sport = document.getElementById('sport').value;
+    var teamSelect = document.getElementById('sportcuore');
+    fetch("/getTeams", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ sport: sport }),
+    }).then(function (response) {
+        if (response.status !== 200) {
+            throw new Error("ERRORE CARICAMENTO SQUADRE");
+
+        }
+        return response.json();
+
+    }).then(function (json) {
+        teamSelect.innerHTML = '';
+        json.forEach(team => {
+            var option = document.createElement('option');
+            option.value = team.nomesquadra;
+            option.textContent = team.nomesquadra;
+            teamSelect.appendChild(option);
+        });
+    }).catch(error => {
+        console.error(error);
+    });
+}
+
+function inviamo(){
+    var righe = document.getElementsByTagName("tr");
+    fetch("/scommesse", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `pronostico1=${encodeURIComponent(document.getElementById("pronostico1").value)}&pronostico2=${encodeURIComponent(document.getElementById("pronostico2").value)}`
+    }).then(function (response) {
+        if (!response.ok) {
+            throw new Error("ERRORE CARICAMENTO PARTITE");
+
+        }
+        return response.json();
+
+    }).then(function (risultati) {
+        var risultRig = document.createElement('tr');
+        var risultCol = document.createElement('td');
+        risultCol.colSpan = 3;
+        risultCol.textContent = "Risultati"+ risultati.join("-");
+        risultRig.appendChild(risultCol);
+
+        document.querySelector('form').after(risultRig);
+    }).catch(error => {
+        console.error(error);
+        alert("SI è VERIFICATTO UN ERRORE: "+ error.message);
+    });
+}
+
+
 

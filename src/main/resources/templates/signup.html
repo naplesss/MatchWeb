@@ -63,7 +63,7 @@
     </div><br><br>
 <!--    scelta dello sport-->
     <label for="sport">Seleziona uno sport:</label>
-    <select id="sport" name="sport" required>
+    <select id="sport" name="sport" onchange="mostraSquadre()" required>
         <option value="fune">Tiro alla fune</option>
         <option value="lacrosse">Lacrosse</option>
         <option value="polo">Polo</option>
@@ -71,8 +71,8 @@
     <br><br>
 <!--    scelta della squadra del cuore-->
     <label for="sportcuore">Seleziona una squadra:</label>
-    <select id="sportcuore" name="sportcuore"  required >
-        <option value="1">scegli una squadra</option>
+    <select id="sportcuore" name="sportcuore" required >
+        <option value="">scegli una squadra</option>
 
     </select><br><br>
 <!--submit e reset-->

@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/recensione").hasAnyRole("USER","MODERATOR")
                         .requestMatchers("/cambioPassword").hasAnyRole( "USER","MODERATOR")
                         .requestMatchers("/calendario").hasAnyRole("USER","MODERATOR")
+                        .requestMatchers("/ProfiloUtente").hasAnyRole("USER","MODERATOR")
                         .requestMatchers("/dashboardAdmin").hasRole("ADMIN")
                         .requestMatchers("/ListaUtenti").hasRole("ADMIN")
                         .requestMatchers("/ClassificaUtenti").hasRole("ADMIN")

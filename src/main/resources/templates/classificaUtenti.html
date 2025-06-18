@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CLASSIFICA UTENTI</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/mw.jpg}">
+</head>
+<body>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Punti</th>
+    </tr>
+    <tr th:each="classifica : ${ListaUtenti}">
+        <td th:text="${classifica.username}"></td>
+        <td th:text="${classifica.tot_punti}"></td>
+
+    </tr>
+</table>
+</body>
+</html>

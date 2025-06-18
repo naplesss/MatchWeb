@@ -188,6 +188,11 @@ public class MainController {
         model.addAttribute("recensioni",recensioneRepository.findAllRecensioni());
         return ("RecensioniGlobale");
     }
+    @GetMapping("/ProfiloUtente")
+    public String profiloUtente(Authentication authentication , Model model) {
+        model.addAttribute("ListaUtenti", userRepository.findByUsernameXProfilo(authentication.getName()));
+        return ("VisualizzaProfilo");
+    }
 
     @PostMapping("/cambioPassword")
     public String cambioPassword(Authentication authentication,@RequestParam String passwordV,@RequestParam String passwordN,
@@ -209,6 +214,11 @@ public class MainController {
         model.addAttribute("partite",partiteWeb.getMatches(sport, LocalDate.now().toString()));
         return ("VisualizzaCalendario");
     }
-
+    @GetMapping("/listaSport")
+    public String listaSport(Authentication authentication, Model model) {
+        String sport = userRepository.FindSport(authentication.getName());
+        model.addAttribute("squadre", partiteWeb.getTeams(sport));
+        return ("listaSports");
+    }
 
 }

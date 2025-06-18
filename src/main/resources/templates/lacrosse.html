@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>lacrosse</title>
+    <title>LACROSSE</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/mw.jpg}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,5 +15,16 @@
 <img th:src="@{/images/lacrosse.jpg}"style="float: left; width: 150px;height: auto; margin-right: 30px; border-radius: 50%;border-color: black;border-width: 5px;border-style: solid;">
 <p style="font-family: 'Copperplate Gothic Bold'">Il lacrosse è uno sport di squadra veloce e fisico, nato tra le tribù native americane e oggi diffuso soprattutto in Nord America, Europa e Australia. Si gioca con una palla di gomma e una racchetta (stick o crosse) dotata di una rete all'estremità, usata per passare, raccogliere e tirare la palla verso la porta avversaria.</p>
 <p style="font-family: 'Copperplate Gothic Bold'">lista squadre</p>
+<table>
+    <tr th:each=" : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.role}"></td>
+    </tr>
+</table>
+</div>
+
 </body>
 </html>

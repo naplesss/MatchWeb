@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>PROFILO UTENTE</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/mw.jpg}">
 </head>
 <body>
+<h1>Welcome in your administration dashboard, <span th:text="${name}"></span>!</h1>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Email</th>
+        <th>Ruolo</th>
+        <th>Data di Nascita</th>
+        <th>Punti</th>
+    </tr>
+    <tr th:each="profilo : ${ListaUtenti}">
+        <td th:text="${profilo.username}"></td>
+        <td th:text="${profilo.firstName}"></td>
+        <td th:text="${profilo.lastName}"></td>
+        <td th:text="${profilo.email}"></td>
+        <td th:text="${profilo.role}"></td>
+        <td th:text="${profilo.birthdate}"></td>
+        <!-- <td th:text="${profilo.points}"></td> -->
+        <td th:text="${profilo.id}"></td>
 
+    </tr>
+</table>
 </body>
 </html>

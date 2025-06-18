@@ -1,10 +1,13 @@
 package org.example.matcheweb.controllers;
 
+import org.example.matcheweb.pojos.Partita;
 import org.example.matcheweb.pojos.Recensione;
+import org.example.matcheweb.pojos.Squadra;
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.proxies.PartiteWeb;
 import org.example.matcheweb.repositories.UserRepository;
 import org.example.matcheweb.repositories.recensioneRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -209,6 +215,35 @@ public class MainController {
         model.addAttribute("partite",partiteWeb.getMatches(sport, LocalDate.now().toString()));
         return ("VisualizzaCalendario");
     }
+
+    @PostMapping("/getTeams")
+    @ResponseBody
+    public List<Squadra> post(@RequestBody Map<String, String> data) {
+        String sport = data.get("sport");
+        return partiteWeb.getTeams(sport);
+    }
+
+    @GetMapping("/schedina")
+    public String schedina(Model model) {
+        List<Partita> partite = partiteWeb.getMatches("lacrosse", LocalDate.now().toString());
+        model.addAttribute("partita1", partite.get(0));
+        model.addAttribute("partita2", partite.get(1));
+
+        return("Schedina");}
+
+
+    @PostMapping("/scommesse")
+    public ResponseEntity<String> post(@RequestParam int pronostico1, @RequestParam int pronostico2, Model model) {
+        List<Integer> pronostici = new ArrayList<>();
+        pronostici.add(pronostico1);
+        pronostici.add(pronostico2);
+        List<Integer> risultati = partiteWeb.getResults("lacrosse", LocalDate.now().toString(),pronostici);
+        model.addAttribute("risultati", risultati);
+        return ResponseEntity.ok("");
+    }
+
+
+
 
 
 }

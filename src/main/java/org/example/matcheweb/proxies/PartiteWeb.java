@@ -26,7 +26,7 @@ public interface PartiteWeb {
     public  List<Partita> getAllMatches(@RequestParam String sport);
 
     @PostMapping("/getTeams")
-    public  List<Partita> getTeams(@RequestParam String sport);
+    public  List<Squadra> getTeams(@RequestParam String sport);
 
     // @PostMapping("/createMatches")
     // public  void createMatches(@RequestBody String sport);

@@ -16,12 +16,9 @@
 <p style="font-family: 'Copperplate Gothic Bold'">Il lacrosse è uno sport di squadra veloce e fisico, nato tra le tribù native americane e oggi diffuso soprattutto in Nord America, Europa e Australia. Si gioca con una palla di gomma e una racchetta (stick o crosse) dotata di una rete all'estremità, usata per passare, raccogliere e tirare la palla verso la porta avversaria.</p>
 <p style="font-family: 'Copperplate Gothic Bold'">lista squadre</p>
 <table>
-    <tr th:each=" : ${users}">
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.lastName}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.role}"></td>
+    <tr th:each="squadra : ${squadre}">
+        <td th:text="${squadra.nomesquadra}"></td>
+
     </tr>
 </table>
 </div>

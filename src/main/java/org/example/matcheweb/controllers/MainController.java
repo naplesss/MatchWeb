@@ -71,7 +71,9 @@ public class MainController {
 
     //lacrosse
     @GetMapping("/lacrosse")
-    public String lacrosse() {return "lacrosse";}
+    public String lacrosse(Model model) {
+        model.addAttribute("squadre",partiteWeb.getSquadreBySport("lacrosse"));
+        return "lacrosse";}
 
     //pagina sponsor
     @GetMapping("/sponsor")

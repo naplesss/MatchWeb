@@ -3,6 +3,7 @@ package org.example.matcheweb.pojos;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 
 public class User {
     private int id;
@@ -18,6 +19,7 @@ public class User {
     private int punti;
     private int rank;
     private int numschedine;
+    private List<String> premi;
 
     public User() {
         this.numschedine = 0;
@@ -33,6 +35,7 @@ public class User {
         this.squadra = "";
         this.punti = 0;
         this.rank = 0;
+        this.premi = List.of();
     }
 
     public User(String firstName, String lastName, String email, String username, String password, String role, Date birthdate, String sport, String squadra) {
@@ -64,7 +67,9 @@ public class User {
     public int getPunti() {return punti;}
     public int getRank() {return rank;}
     public int getNumschedine() {return numschedine;}
+    public List<String> getPremi() {return premi;}
 
+    public void setPremi(List<String> premi) {this.premi = premi;}
     public void setId(int id) {this.id = id;}
     public void setNome(String firstName) {this.firstName = firstName;}
     public void setCognome(String lastName) {this.lastName = lastName;}

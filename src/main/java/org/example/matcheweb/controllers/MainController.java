@@ -5,8 +5,10 @@ import org.example.matcheweb.pojos.Recensione;
 import org.example.matcheweb.pojos.Squadra;
 import org.example.matcheweb.pojos.User;
 import org.example.matcheweb.proxies.PartiteWeb;
+import org.example.matcheweb.repositories.PartiteRepository;
 import org.example.matcheweb.repositories.UserRepository;
 import org.example.matcheweb.repositories.recensioneRepository;
+import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,11 +29,13 @@ public class MainController {
     private final UserRepository userRepository;
     private final recensioneRepository recensioneRepository;
     private final PartiteWeb partiteWeb;
+    private final PartiteRepository partiteRepository;
 
-    MainController(UserRepository userRepository, recensioneRepository recensioneRepository, PartiteWeb partiteWeb) {
+    MainController(UserRepository userRepository, recensioneRepository recensioneRepository, PartiteWeb partiteWeb, PartiteRepository partiteRepository) {
         this.userRepository = userRepository;
         this.recensioneRepository = recensioneRepository;
         this.partiteWeb = partiteWeb;
+        this.partiteRepository = partiteRepository;
     }
 
     //home page
@@ -227,7 +231,10 @@ public class MainController {
 
     //pagina per giocare la schedina
     @GetMapping("/schedina")
-    public String schedina(Model model) {
+    public String schedina(Authentication authentication, Model model) {
+        if(partiteRepository.giaGiocato(userRepository.findByUsername(authentication.getName()).getId())){
+            return ("scommessaFatta");
+        }else{
         List<Partita> partite = partiteWeb.getMatches("lacrosse", LocalDate.now().toString());
         System.out.println(partite);
         System.out.println(LocalDate.now().toString());
@@ -240,18 +247,17 @@ public class MainController {
         model.addAttribute("partita1", partite != null && !partite.isEmpty() ? partite.get(0) : defaultPartita);
         model.addAttribute("partita2", partite != null && partite.size() > 1 ? partite.get(1) : defaultPartita);
 
-        return("Schedina");}
+        return("Schedina");}}
 
     //risultati delle scommesse
     @PostMapping("/scommesse")
-    public ResponseEntity<List<Integer>> post(@RequestParam int pronostico1, @RequestParam int pronostico2, Model model) {
-        List<Integer> pronostici = new ArrayList<>();
-        pronostici.add(pronostico1);
-        pronostici.add(pronostico2);
-        List<Integer> risultati = partiteWeb.getResults("lacrosse", LocalDate.now().toString(),pronostici);
+    public ResponseEntity<List<Integer>> post(Authentication authentication ,@RequestParam int pronostico1, @RequestParam int pronostico2, Model model) {
+        List<Integer> risultati = partiteWeb.getResults(pronostico1, pronostico2);
         model.addAttribute("risultati", risultati);
+       partiteRepository.NuovaSchedina(userRepository.findByUsername(authentication.getName()).getId(),risultati.get(2));
         return ResponseEntity.ok(risultati);
-    }
+
+     }
 
 
 

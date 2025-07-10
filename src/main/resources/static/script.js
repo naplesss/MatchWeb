@@ -161,7 +161,7 @@ function inviamo(){
         var risultRig = document.createElement('tr');
         var risultCol = document.createElement('td');
         risultCol.colSpan = 3;
-        risultCol.textContent = "Risultati"+ risultati.join("-");
+        risultCol.textContent = "Risultati"+ risultati.join("-") + "  --Schedina giocata!";
         risultRig.appendChild(risultCol);
 
         document.querySelector('form').after(risultRig);

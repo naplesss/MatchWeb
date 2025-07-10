@@ -47,7 +47,7 @@ public class AdminController {
     public String AssegnazionePremi01(){
         return ("assegnazionePremi01");
     }
-    @GetMapping("/AssegnazionePremi02")
+    @GetMapping("/AssegnazionePremi2")
     public String AssegnazionePremi02(Model model) {
         List<String> premi = assegnaPremi.getPremi();
         List<User> ClassificaUtenti = userRepository.getClassificaUtenti();
@@ -60,21 +60,14 @@ public class AdminController {
         model.addAttribute("Premio03", premi.get(2) );
         return ("assegnazionePremi02");
     }
-//    @GetMapping("/upgradeUser")
-//    public String upgradeUser(Model model) {
-//        model.addAttribute("userList", userRepository.getUsersOnly());
-//        return "segments/adminActions/promote";
-//    }
+    @GetMapping("/upgradeUser2")
+    public String upgradeUser2(){return("UpgradeUser");}
+    @PostMapping("/upgradeUser")
+    public String upgradeUser(Authentication authentication,@RequestParam String username, Model model){
+        userRepository.upgradeUser(username);
+     return ("upgradeUser");
+    }
 
-    // actual promotion of a user to admin
-    // reloads the user list after promotion
-//    @PostMapping("/promote")
-//    public String promote(@RequestBody Map<String, Object> payload, Model model) {
-//        int userId = (int) payload.get("userId");
-//        userRepository.promoteUser(userId);
-//        model.addAttribute("userList", userRepository.getUsersOnly());
-//        return "segments/adminActions/promote";
-//    }
 
 
 

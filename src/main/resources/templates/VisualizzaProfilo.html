@@ -15,8 +15,8 @@
 </head>
 <body>
 <div th:replace="~{NavBarUser.html}"></div>
-<h1>Welcome in your administration dashboard, <span th:text="${name}"></span>!</h1>
-<table>
+<h1>Welcome in your administration dashboard, <span th:text="${profilo.username}"></span>!</h1>
+<table class="table table-striped">
     <tr>
         <th>Username</th>
         <th>Nome</th>
@@ -38,9 +38,14 @@
         <td th:text="${profilo.punti}"></td>
         <td th:text="${profilo.rank}"></td>
         <td th:text="${profilo.numschedine}"></td>
-
-
     </tr>
 </table>
+
+<p>Premi:</p>
+<ul>
+    <li th:each="premio : ${profilo.premi}">
+        <p th:text="${premio}"></p>
+    </li>
+</ul>
 </body>
 </html>

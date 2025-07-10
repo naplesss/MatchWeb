@@ -109,11 +109,28 @@ import java.util.List;
                 user.setBirthdate(r.getDate("birthdate"));
                 user.setRole(r.getString("AUTHORITY"));
                 user.setEmail(r.getString("email"));
-                //user.setPunti(r.getInt("punti"));
                 return user;
             };
 
-            return jdbc.queryForObject(sql,userRowMapper,username);
+            User user = jdbc.queryForObject(sql,userRowMapper,username);
+            sql =   "SELECT COUNT(*) AS n_giornate FROM giornate WHERE ID = ?";
+            RowMapper<Integer> intRowMapper = (resultSet, rowNum) -> resultSet.getInt("n_giornate");
+            user.setNumschedine(jdbc.queryForObject(sql, intRowMapper, user.getId()));
+
+            sql = "SELECT punti AS tot_punti FROM giornate WHERE ID = ? AND giorno=?";
+            intRowMapper = (resultSet, rowNum) -> resultSet.getInt("tot_punti");
+            user.setPunti(jdbc.queryForObject(sql, intRowMapper, user.getId(), LocalDate.now().toString()));
+
+            sql = "SELECT count(*) as rank from giornate where punti>?";
+            intRowMapper = (resultSet, rowNum) -> resultSet.getInt("rank");
+            user.setRank(jdbc.queryForObject(sql, intRowMapper, user.getPunti())+1);
+
+            sql = "SELECT premio FROM premi WHERE username = ?";
+            RowMapper<String> premioRowMapper = (resultSet, rowNum) -> resultSet.getString("premio");
+            user.setPremi(jdbc.query(sql, premioRowMapper, user.getUsername()));
+
+            return user;
+
         }
         //cambia la password di un utente
         public boolean cambiaPassword(String username, String nuova, String vecchia) {
@@ -125,6 +142,11 @@ import java.util.List;
                 userDetailsManager.changePassword(passwordEncoder.encode(vecchia), passwordEncoder.encode(nuova));
             }
             return result;
+        }
+        //upgrade user
+        public void upgradeUser(String username){
+            String sql = "UPDATE AUTHORITIES SET authority = 'ROLE_MODERATOR' WHERE USERNAME = ?";
+            jdbc.update(sql, username);
         }
         //restituisce lo sport
         public String FindSport(String username){

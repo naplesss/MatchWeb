@@ -33,10 +33,7 @@ public interface PartiteWeb {
     // public  void createMatches(@RequestBody String sport);
 
     @PostMapping("/prendiRisultati")
-    List<Integer> getResults(
-            @RequestParam("sport") String sport,
-            @RequestParam("giorno") String giorno,
-            @RequestBody List<Integer> predictions);
+    List<Integer> getResults(@RequestParam int pronostico1, @RequestParam int pronostico2);
 
 
 

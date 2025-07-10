@@ -135,7 +135,13 @@ public class MainController {
         model.addAttribute("name", authentication.getName());
         return "DashboardUser";
     }
+    @GetMapping("/ProfiloUtente")
+    public String profiloUtente(Authentication authentication, Model model) {
+        User user = userRepository.findByUsernameXProfilo(authentication.getName());
+        model.addAttribute("profilo",user);
 
+        return "VisualizzaProfilo";
+    }
     //dashboard admin
     @GetMapping("/dashboardAdmin")
     public String adminDashboard(Authentication authentication, Model model) {
@@ -216,14 +222,15 @@ public class MainController {
     @ResponseBody
     public List<Squadra> post(@RequestBody Map<String, String> data) {
         String sport = data.get("sport");
-        return partiteWeb.getTeams(sport);
+        return partiteWeb.getSquadreBySport(sport);
     }
 
     //pagina per giocare la schedina
     @GetMapping("/schedina")
     public String schedina(Model model) {
         List<Partita> partite = partiteWeb.getMatches("lacrosse", LocalDate.now().toString());
-
+        System.out.println(partite);
+        System.out.println(LocalDate.now().toString());
         //per gestire i null
         Partita defaultPartita = new Partita();
         defaultPartita.setId_squadracasa("N/D");

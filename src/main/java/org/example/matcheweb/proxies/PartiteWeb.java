@@ -20,7 +20,7 @@ import java.util.List;
 public interface PartiteWeb {
     @PostMapping("/listaPartite")
     public List<Partita> getMatches(@RequestParam String sport, @RequestParam String giorno);
-    @GetMapping("/listaSquadre")
+    @PostMapping("/listaSquadre")
     public List<Squadra> getSquadreBySport(@RequestParam String sport);
 
     @PostMapping("/CalendarioPartite")

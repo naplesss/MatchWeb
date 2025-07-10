@@ -17,7 +17,10 @@ public class User {
     private String squadra;
     private int punti;
     private int rank;
+    private int numschedine;
+
     public User() {
+        this.numschedine = 0;
         this.id = 0;
         this.firstName = "";
         this.lastName = "";
@@ -33,6 +36,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String email, String username, String password, String role, Date birthdate, String sport, String squadra) {
+        this.numschedine = 0;
         this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,7 +62,8 @@ public class User {
     public String getsport() {return sport;}
     public String getsquadra() {return squadra;}
     public int getPunti() {return punti;}
-    public int getClassifica() {return rank;}
+    public int getRank() {return rank;}
+    public int getNumschedine() {return numschedine;}
 
     public void setId(int id) {this.id = id;}
     public void setNome(String firstName) {this.firstName = firstName;}
@@ -71,5 +76,6 @@ public class User {
     public void setSport(String sport) {this.sport = sport;}
     public void setSquadra(String squadra) {this.squadra = squadra;}
     public void setPunti(int points) {this.punti = points;}
-    public void setClassifica(int rank) {this.rank = rank;}
+    public void setRank(int rank) {this.rank = rank;}
+    public void setNumschedine(int numschedine) {this.numschedine = numschedine;}
 }

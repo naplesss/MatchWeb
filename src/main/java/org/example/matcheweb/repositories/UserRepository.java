@@ -67,7 +67,7 @@ import java.util.List;
                 User user = new User();
                 user.setUsername(r.getString("username"));
                 user.setPunti(r.getInt("tot_punti"));
-                    user.setClassifica(i + 1);
+                    user.setRank(i + 1);
                     return user;
                 };
             return jdbc.query(sql,rankingRowMapper);

@@ -22,9 +22,9 @@ public class AdminController {
         this.userRepository = userRepository;
         this.assegnaPremi = assegnaPremi;
     }
-    //controller per gestire le pagine dell'admin
 
-    //per la lista utenti
+
+    //lista utenti
     @GetMapping("/ListaUtenti")
     public String getUsers(Authentication authentication, Model model) {
         String name = authentication.getName();
@@ -35,14 +35,14 @@ public class AdminController {
         else
             return ("DashboardAdmin");
     }
-    //per la classifica degli utanti
+    //classifica degli utanti
     @GetMapping("/ClassificaUtenti")
     public String ClassificaUtenti(Model model) {
         model.addAttribute("ListaUtenti", userRepository.getClassificaUtenti());
         return ("classificaUtenti");
 
     }
-    //per assegnare i premi
+    // assegnare i premi
     @GetMapping("/AssegnazionePremi01")
     public String AssegnazionePremi01(){
         return ("assegnazionePremi01");

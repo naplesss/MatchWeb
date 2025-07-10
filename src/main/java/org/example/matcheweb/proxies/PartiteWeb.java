@@ -21,7 +21,7 @@ public interface PartiteWeb {
     @PostMapping("/listaPartite")
     public List<Partita> getMatches(@RequestParam String sport, @RequestParam String giorno);
     @GetMapping("/listaSquadre")
-    public ResponseEntity<List<Squadra>> getSquadreBySport(@RequestParam String sport);
+    public List<Squadra> getSquadreBySport(@RequestParam String sport);
 
     @PostMapping("/CalendarioPartite")
     public  List<Partita> getAllMatches(@RequestParam String sport);

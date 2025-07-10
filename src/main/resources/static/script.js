@@ -29,7 +29,7 @@ function mostraPassword(id) {
         password.type = "password";
     }
 }
-
+//controlla l'uguaglianza delle password
 function matchpassword(passwordId, checkId){
     var password = document.getElementById(passwordId).value;
     var check = document.getElementById(checkId).value;
@@ -49,7 +49,7 @@ function matchpassword(passwordId, checkId){
     }
     return bool;
 }
-
+//controlla che la password rispetta i parametri
 function checkPassword(){
     var password = document.getElementById('password');
     var numeriB = document.getElementById('numeri');//la barra dei numeri
@@ -95,42 +95,53 @@ function checkPassword(){
     return bool;
 
 }
+//nasconde il messaggio
 function nascondiMessaggio(id){
     document.getElementById(id).style.display = "none";
 }
+//mostra il messaggio
 function mostraMessaggio(id){
     document.getElementById(id).style.display = "block";
 }
-
+//aggiunge le squadre al select
 function mostraSquadre(){
     var sport = document.getElementById('sport').value;
     var teamSelect = document.getElementById('sportcuore');
-    fetch("/getTeams", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ sport: sport }),
-    }).then(function (response) {
-        if (response.status !== 200) {
-            throw new Error("ERRORE CARICAMENTO SQUADRE");
+    var messaggio = document.getElementById('container');
+    if(sport === 'lacrosse'){
+        messaggio.style.display = "none";
+    }
+    else {
+        messaggio.style.display = "block";
+    }
+        fetch("/getTeams", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({sport: sport}),
+        }).then(function (response) {
+            if (response.status !== 200) {
+                throw new Error("ERRORE CARICAMENTO SQUADRE");
 
-        }
-        return response.json();
+            }
+            return response.json();
 
-    }).then(function (json) {
-        teamSelect.innerHTML = '';
-        json.forEach(team => {
-            var option = document.createElement('option');
-            option.value = team.nomesquadra;
-            option.textContent = team.nomesquadra;
-            teamSelect.appendChild(option);
+        }).then(function (json) {
+            teamSelect.innerHTML = '';
+            json.forEach(team => {
+                var option = document.createElement('option');
+                option.value = team.nomesquadra;
+                option.textContent = team.nomesquadra;
+                teamSelect.appendChild(option);
+            });
+        }).catch(error => {
+            console.error(error);
         });
-    }).catch(error => {
-        console.error(error);
-    });
-}
 
+
+}
+//invia i dati al server e restituisce "teoricamente" i risultati
 function inviamo(){
     var righe = document.getElementsByTagName("tr");
     fetch("/scommesse", {

@@ -1,8 +1,14 @@
 /* Add a green text color and a checkmark when the requirements are right */
 .valid {
-    color: green;
+    color: darkgreen;
+    background-color: yellowgreen;
 }
 
 .invalid{
     color:red;
+    background-color: maroon;
+}
+
+div>input{
+    width: 300px;
 }

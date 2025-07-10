@@ -11,20 +11,17 @@
 <body>
 <div th:replace="~{BarraDiNavigazione.html}"></div>
 <div th:replace="~{News.html}"></div>"
-<h3 style="font-family: 'Copperplate Gothic Bold'">LACROSSE</h3>
-<img th:src="@{/images/lacrosse.jpg}"style="float: left; width: 150px;height: auto; margin-right: 30px; border-radius: 50%;border-color: black;border-width: 5px;border-style: solid;">
-<p style="font-family: 'Copperplate Gothic Bold'">Il lacrosse è uno sport di squadra veloce e fisico, nato tra le tribù native americane e oggi diffuso soprattutto in Nord America, Europa e Australia. Si gioca con una palla di gomma e una racchetta (stick o crosse) dotata di una rete all'estremità, usata per passare, raccogliere e tirare la palla verso la porta avversaria.</p>
-<p style="font-family: 'Copperplate Gothic Bold'">lista squadre</p>
+<h3 style="font-family: 'Copperplate Gothic Bold',serif">LACROSSE</h3>
+<img th:src="@{/images/lacrosse.jpg}" style="float: left; width: 150px;height: auto; margin-right: 30px; border-radius: 50%;border-color: black;border-width: 5px;border-style: solid;">
+<p style="font-family: 'Copperplate Gothic Bold',serif">Il lacrosse è uno sport di squadra veloce e fisico, nato tra le tribù native americane e oggi diffuso soprattutto in Nord America, Europa e Australia. Si gioca con una palla di gomma e una racchetta (stick o crosse) dotata di una rete all'estremità, usata per passare, raccogliere e tirare la palla verso la porta avversaria.</p>
+<p style="font-family: 'Copperplate Gothic Bold',serif">lista squadre</p>
 <table>
-    <tr th:each=" : ${users}">
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.lastName}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.role}"></td>
+    <tr th:each="squadra : ${squadre}">
+        <td th:text="${squadra.nomesquadra}"></td>
+
     </tr>
 </table>
-</div>
+
 
 </body>
 </html>

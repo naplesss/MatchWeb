@@ -134,7 +134,7 @@ import java.util.List;
                 return sport;
             };
             return jdbc.queryForObject(sql,FindSport,username);
-//            public String Teams();
+
         }
 
     }

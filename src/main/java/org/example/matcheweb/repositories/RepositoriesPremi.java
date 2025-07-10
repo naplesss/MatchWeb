@@ -2,7 +2,7 @@ package org.example.matcheweb.repositories;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+//premi
 @Repository
 public class RepositoriesPremi {
     private final JdbcTemplate jdbc;
